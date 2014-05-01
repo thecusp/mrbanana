@@ -1,0 +1,44 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="2"
+    tools:context="com.mrbanana.MainActivity$PlaceholderFragment" >
+
+    <ImageView
+        android:id="@+id/act_frag_pagesevenIvImage"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="#F8F8F8"
+        android:scaleType="fitCenter"
+        android:src="@drawable/pageseven" />
+
+    <Button
+        android:id="@+id/act_frag_pagesevenBtnGetStarted"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@drawable/selector_act_fragseven_getstartedbtn"
+        android:text="Get Started" />
+
+    <TextView
+        android:id="@+id/act_frag_pagesevenTvBig"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:text="Rate your Tradesmen"
+        android:textSize="17sp" />
+
+    <TextView
+        android:id="@+id/act_frag_pagesevenTvSmall"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:text="All our tradesmen have above 2.5* ratings from clients"
+        android:textSize="14sp" />
+
+</LinearLayout>

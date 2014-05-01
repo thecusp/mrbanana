@@ -1,0 +1,138 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ali_lRlScreenParentLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F8F8F8" >
+
+    <ScrollView
+        android:id="@+id/ali_lSv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true" >
+
+        <RelativeLayout
+            android:id="@+id/ali_lscrollviewchild"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <RelativeLayout
+                android:id="@+id/ali_lRlHeaderWrapper"
+                android:layout_width="match_parent"
+                android:layout_height="70dp" >
+
+                <TextView
+                    android:id="@+id/ali_lTvHeaderName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_centerHorizontal="true"
+                    android:background="#FEDA47"
+                    android:gravity="center"
+                    android:padding="5dp"
+                    android:text="Mr Banana"
+                    android:textColor="#000"
+                    android:textSize="24sp" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/ali_lLlInputFeildsWrapper"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ali_lRlHeaderWrapper"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp" >
+
+                <View
+                    android:id="@+id/ali_lVGreyDivider"
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:background="#F0F0F1" />
+
+                <TextView
+                    android:id="@+id/ali_lTvHeaderTxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:text="Log in to continue to MR Banana"
+                    android:textSize="18sp" />
+
+                <View
+                    android:id="@+id/ali_lVGreyDivider"
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:background="#F0F0F1" />
+
+                <EditText
+                    android:id="@+id/ali_lEtName"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:background="#fff"
+                    android:hint="Email address"
+                    android:padding="10dp"
+                    android:textSize="18sp" />
+
+                <View
+                    android:id="@+id/ali_lVGreyDivider"
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:background="#F0F0F1" />
+
+                <EditText
+                    android:id="@+id/ali_lEtPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:background="#fff"
+                    android:hint="Password"
+                    android:inputType="textPassword"
+                    android:padding="10dp"
+                    android:textSize="18sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ali_lLlFORGOTPAsswordOrNewUserWrapper"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ali_lBtnContinue"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/ali_lTvForgotPassword"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Forgot Password"
+                    android:textColor="#3791FD" />
+
+                <TextView
+                    android:id="@+id/ali_lTvOr"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text=" Or " />
+
+                <TextView
+                    android:id="@+id/ali_lTvNewUser"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="New User ?"
+                    android:textColor="#3791FD" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/ali_lBtnContinue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ali_lLlInputFeildsWrapper"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/selector_act_fragseven_getstartedbtn"
+                android:text="Continue" />
+        </RelativeLayout>
+    </ScrollView>
+
+</RelativeLayout>

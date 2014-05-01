@@ -1,0 +1,566 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/aaal_lRlScreenParentLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F8F8F8" >
+
+    <ScrollView
+        android:id="@+id/aaal_lSv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true" >
+
+        <RelativeLayout
+            android:id="@+id/aaal_lscrollviewchild"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <LinearLayout
+                android:id="@+id/aaal_lLlHeaderBarWrapper"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/aaal_lTvBack"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:paddingLeft="10dp"
+                    android:text="Close"
+                    android:textColor="#3791FD"
+                    android:textSize="22sp" />
+
+                <TextView
+                    android:id="@+id/aaal_lTvOr"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text=" Account "
+                    android:textSize="22sp" />
+
+                <TextView
+                    android:id="@+id/aaal_lTvNewUser"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:paddingRight="10dp"
+                    android:text="Resend SMS"
+                    android:textColor="#3791FD"
+                    android:textSize="22sp"
+                    android:visibility="invisible" />
+            </LinearLayout>
+
+            <View
+                android:id="@+id/aaal_lVGreyDivider1"
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:layout_below="@+id/aaal_lLlHeaderBarWrapper"
+                android:background="#F0F0F1" />
+
+            <LinearLayout
+                android:id="@+id/aaal_lLlInputFeildsWrapper"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/aaal_lVGreyDivider1"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp" >
+
+                <TextView
+                    android:id="@+id/aaal_lTvHeaderTxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:gravity="center_vertical"
+                    android:padding="10dp"
+                    android:text=""
+                    android:textSize="18sp" />
+
+                <View
+                    android:id="@+id/aaal_lVGreyDivider"
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:background="#F0F0F1" />
+
+                <RelativeLayout
+                    android:id="@+id/aaal_lLlTellFriends"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="#fff" >
+
+                    <ImageView
+                        android:id="@+id/aaal_lIvTellFriendsIcon"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="10dp" />
+
+                    <TextView
+                        android:id="@+id/aaal_lTvTellFriendsText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="10dp"
+                        android:layout_toRightOf="@+id/aaal_lIvTellFriendsIcon"
+                        android:text="Tell friends about Mr Banana"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/aaal_lTvTellFriendsValue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="10dp"
+                        android:layout_toRightOf="@+id/aaal_lTvTellFriendsText"
+                        android:text="Enter Code"
+                        android:textColor="#B5B5B5"
+                        android:textSize="20sp"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:id="@+id/aaal_lTvTellFriendsArrow"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dp"
+                        android:text=">"
+                        android:textColor="#B5B5B5"
+                        android:textSize="30sp" />
+                </RelativeLayout>
+
+                <View
+                    android:id="@+id/aaal_lVGreyDivider"
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:background="#F0F0F1" />
+
+                <TextView
+                    android:id="@+id/aaal_lTvHeaderTxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:gravity="center_vertical"
+                    android:padding="10dp"
+                    android:text=""
+                    android:textSize="18sp" />
+
+                <View
+                    android:id="@+id/aaal_lVGreyDivider"
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:background="#F0F0F1" />
+
+                <RelativeLayout
+                    android:id="@+id/aaal_lLlCards"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="#fff" >
+
+                    <ImageView
+                        android:id="@+id/aaal_lIvCardsIcon"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="10dp"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:id="@+id/aaal_lTvCardsText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="10dp"
+                        android:layout_toRightOf="@+id/aaal_lIvCardsIcon"
+                        android:text="Credit Cards"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/aaal_lTvCardsValue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="10dp"
+                        android:layout_toLeftOf="@+id/aaal_lTvCardsArrow"
+                        android:text=""
+                        android:textColor="#B5B5B5"
+                        android:textSize="20sp"
+                        android:visibility="visible" />
+
+                    <TextView
+                        android:id="@+id/aaal_lTvCardsArrow"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dp"
+                        android:text=">"
+                        android:textColor="#B5B5B5"
+                        android:textSize="30sp" />
+                </RelativeLayout>
+
+                <View
+                    android:id="@+id/aaal_lVGreyDivider"
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:background="#F0F0F1" />
+
+                <RelativeLayout
+                    android:id="@+id/aaal_lLlTipHistory"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="#fff" >
+
+                    <ImageView
+                        android:id="@+id/aaal_lIvTipHistoryIcon"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="10dp"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:id="@+id/aaal_lTvTipHistoryText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="10dp"
+                        android:layout_toRightOf="@+id/aaal_lIvTipHistoryIcon"
+                        android:text="Work History"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/aaal_lTvTipHistoryValue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="10dp"
+                        android:layout_toLeftOf="@+id/aaal_lTvTipHistoryArrow"
+                        android:text=""
+                        android:textColor="#B5B5B5"
+                        android:textSize="20sp"
+                        android:visibility="visible" />
+
+                    <TextView
+                        android:id="@+id/aaal_lTvTipHistoryArrow"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dp"
+                        android:text=">"
+                        android:textColor="#B5B5B5"
+                        android:textSize="30sp" />
+                </RelativeLayout>
+
+                <View
+                    android:id="@+id/aaal_lVGreyDivider"
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:background="#F0F0F1" />
+
+                <TextView
+                    android:id="@+id/aaal_lTvHeaderTxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:gravity="center_vertical"
+                    android:padding="10dp"
+                    android:text=""
+                    android:textSize="18sp" />
+
+                <View
+                    android:id="@+id/aaal_lVGreyDivider"
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:background="#F0F0F1" />
+
+                <RelativeLayout
+                    android:id="@+id/aaal_lLlProfile"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="#fff" >
+
+                    <ImageView
+                        android:id="@+id/aaal_lIvProfileIcon"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="10dp"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:id="@+id/aaal_lTvProfileText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="10dp"
+                        android:layout_toRightOf="@+id/aaal_lIvProfileIcon"
+                        android:text="Profile"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/aaal_lTvProfileValue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="10dp"
+                        android:layout_toLeftOf="@+id/aaal_lTvProfileArrow"
+                        android:text="Sunny"
+                        android:textColor="#B5B5B5"
+                        android:textSize="20sp"
+                        android:visibility="visible" />
+
+                    <TextView
+                        android:id="@+id/aaal_lTvProfileArrow"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dp"
+                        android:text=">"
+                        android:textColor="#B5B5B5"
+                        android:textSize="30sp" />
+                </RelativeLayout>
+
+                <View
+                    android:id="@+id/aaal_lVGreyDivider"
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:background="#F0F0F1" />
+
+                <RelativeLayout
+                    android:id="@+id/aaal_lLlOptions"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="#fff" >
+
+                    <ImageView
+                        android:id="@+id/aaal_lIvOptionsIcon"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="10dp"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:id="@+id/aaal_lTvOptionsText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="10dp"
+                        android:layout_toRightOf="@+id/aaal_lIvOptionsIcon"
+                        android:text="Options"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/aaal_lTvOptionsValue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="10dp"
+                        android:layout_toLeftOf="@+id/aaal_lTvOptionsArrow"
+                        android:text=""
+                        android:textColor="#B5B5B5"
+                        android:textSize="20sp"
+                        android:visibility="visible" />
+
+                    <TextView
+                        android:id="@+id/aaal_lTvOptionsArrow"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dp"
+                        android:text=">"
+                        android:textColor="#B5B5B5"
+                        android:textSize="30sp" />
+                </RelativeLayout>
+
+                <View
+                    android:id="@+id/aaal_lVGreyDivider"
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:background="#F0F0F1" />
+
+                <TextView
+                    android:id="@+id/aaal_lTvHeaderTxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:gravity="center_vertical"
+                    android:padding="10dp"
+                    android:text=""
+                    android:textSize="18sp" />
+
+                <View
+                    android:id="@+id/aaal_lVGreyDivider"
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:background="#F0F0F1" />
+
+                <RelativeLayout
+                    android:id="@+id/aaal_lLlAbout"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="#fff" >
+
+                    <ImageView
+                        android:id="@+id/aaal_lIvAboutIcon"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="10dp"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:id="@+id/aaal_lTvAboutText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="10dp"
+                        android:layout_toRightOf="@+id/aaal_lIvAboutIcon"
+                        android:text="About"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/aaal_lTvAboutValue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="10dp"
+                        android:layout_toLeftOf="@+id/aaal_lTvAboutArrow"
+                        android:text=""
+                        android:textColor="#B5B5B5"
+                        android:textSize="20sp"
+                        android:visibility="visible" />
+
+                    <TextView
+                        android:id="@+id/aaal_lTvAboutArrow"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dp"
+                        android:text=">"
+                        android:textColor="#B5B5B5"
+                        android:textSize="30sp" />
+                </RelativeLayout>
+
+                <View
+                    android:id="@+id/aaal_lVGreyDivider"
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:background="#F0F0F1" />
+
+                <RelativeLayout
+                    android:id="@+id/aaal_lLlFeedback"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="#fff" >
+
+                    <ImageView
+                        android:id="@+id/aaal_lIvFeedbackIcon"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="10dp"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:id="@+id/aaal_lTvFeedbackText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="10dp"
+                        android:layout_toRightOf="@+id/aaal_lIvFeedbackIcon"
+                        android:text="Send Feedback"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/aaal_lTvFeedbackValue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="10dp"
+                        android:layout_toLeftOf="@+id/aaal_lTvFeedbackArrow"
+                        android:text=""
+                        android:textColor="#B5B5B5"
+                        android:textSize="20sp"
+                        android:visibility="visible" />
+
+                    <TextView
+                        android:id="@+id/aaal_lTvFeedbackArrow"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dp"
+                        android:text=">"
+                        android:textColor="#B5B5B5"
+                        android:textSize="30sp" />
+                </RelativeLayout>
+
+                <View
+                    android:id="@+id/aaal_lVGreyDivider"
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:background="#F0F0F1" />
+
+                <RelativeLayout
+                    android:id="@+id/aaal_lLlLogout"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="#fff" >
+
+                    <ImageView
+                        android:id="@+id/aaal_lIvLogoutIcon"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="10dp"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:id="@+id/aaal_lTvLogoutText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="10dp"
+                        android:layout_toRightOf="@+id/aaal_lIvLogoutIcon"
+                        android:text="Logout"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/aaal_lTvLogoutValue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="10dp"
+                        android:layout_toLeftOf="@+id/aaal_lTvLogoutArrow"
+                        android:text=""
+                        android:textColor="#B5B5B5"
+                        android:textSize="20sp"
+                        android:visibility="visible" />
+
+                    <TextView
+                        android:id="@+id/aaal_lTvLogoutArrow"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dp"
+                        android:text=">"
+                        android:textColor="#B5B5B5"
+                        android:textSize="30sp" />
+                </RelativeLayout>
+            </LinearLayout>
+        </RelativeLayout>
+    </ScrollView>
+
+</RelativeLayout>

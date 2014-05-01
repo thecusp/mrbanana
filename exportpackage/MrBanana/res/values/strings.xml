@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Mr Banana</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+
+    <color name="yellow_act_frag_normal">#FEF016</color>
+    <color name="yellow_act_frag_selcted">#FFD42A</color>
+    
+      <color name="grey_ath_count_bg">#AAAAAA</color>
+
+</resources>

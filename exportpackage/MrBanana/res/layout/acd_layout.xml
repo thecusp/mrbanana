@@ -1,0 +1,231 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/acd_lRlScreenParentLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F8F8F8" >
+
+    <ScrollView
+        android:id="@+id/acd_lSv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true" >
+
+        <RelativeLayout
+            android:id="@+id/acd_lscrollviewchild"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <RelativeLayout
+                android:id="@+id/acd_lRlHeaderWrapper"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp" >
+
+                <TextView
+                    android:id="@+id/acd_lTvBack"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="left|center_vertical"
+                    android:paddingLeft="10dp"
+                    android:text="Accounts"
+                    android:textColor="#3791FD"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/acd_lTvCarddetails"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text=" Card Details  "
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/acd_lTvDone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:paddingRight="10dp"
+                    android:text="Done"
+                    android:textColor="#3791FD"
+                    android:textSize="18sp"
+                    android:visibility="visible" />
+            </RelativeLayout>
+
+            <View
+                android:id="@+id/acd_lVGreyDivider1"
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:layout_below="@+id/acd_lRlHeaderWrapper"
+                android:background="#F0F0F1" />
+
+            <LinearLayout
+                android:id="@+id/acd_lLlInputFeildsWrapper"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/acd_lRlHeaderWrapper"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp" >
+
+                <RelativeLayout
+                    android:id="@+id/acd_lRlInitTextWrapper"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" >
+
+                    <TextView
+                        android:id="@+id/acd_lTvHeaderTxt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_toLeftOf="@+id/acd_lIvLockIcon"
+                        android:gravity="center_vertical"
+                        android:padding="10dp"
+                        android:text=" No hidden charges fully secure."
+                        android:textSize="18sp" />
+
+                    <ImageView
+                        android:id="@+id/acd_lIvLockIcon"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="10dp" />
+                </RelativeLayout>
+
+                <View
+                    android:id="@+id/acd_lVGreyDivider"
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:background="#F0F0F1" />
+
+                <LinearLayout
+                    android:id="@+id/acd_lLlNameWrapper"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:background="#fff"
+                    android:orientation="horizontal" >
+
+                    <EditText
+                        android:id="@+id/acd_lEtFirstName"
+                        android:layout_width="0dp"
+                        android:layout_height="40dp"
+                        android:layout_weight="1"
+                        android:background="#fff"
+                        android:hint="First Name"
+                        android:padding="10dp"
+                        android:textSize="18sp" />
+
+                    <View
+                        android:id="@+id/acd_lVGreyDivider"
+                        android:layout_width="3dp"
+                        android:layout_height="match_parent"
+                        android:background="#F0F0F1" />
+
+                    <EditText
+                        android:id="@+id/acd_lEtLastName"
+                        android:layout_width="0dp"
+                        android:layout_height="40dp"
+                        android:layout_weight="1"
+                        android:background="#fff"
+                        android:hint="Last Name"
+                        android:inputType="phone"
+                        android:padding="10dp"
+                        android:textSize="18sp" />
+                </LinearLayout>
+
+                <View
+                    android:id="@+id/acd_lVGreyDivider"
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:background="#F0F0F1" />
+
+                <EditText
+                    android:id="@+id/acd_lEtCardNo"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:background="#fff"
+                    android:hint="Enter Card No"
+                    android:maxLength="16"
+                    android:padding="10dp"
+                    android:textSize="18sp" />
+
+                <View
+                    android:id="@+id/acd_lVGreyDivider"
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:background="#F0F0F1" />
+
+                <LinearLayout
+                    android:id="@+id/acd_lLlMobileWrapper"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:background="#fff"
+                    android:orientation="horizontal" >
+
+                    <EditText
+                        android:id="@+id/acd_lEtExpiry"
+                        android:layout_width="0dp"
+                        android:layout_height="40dp"
+                        android:layout_weight="1"
+                        android:background="#fff"
+                        android:hint="Expiry"
+                        android:inputType="phone"
+                        android:padding="10dp"
+                        android:textSize="18sp" />
+
+                    <View
+                        android:id="@+id/acd_lVGreyDivider"
+                        android:layout_width="3dp"
+                        android:layout_height="match_parent"
+                        android:background="#F0F0F1" />
+
+                    <EditText
+                        android:id="@+id/acd_lEtCvv"
+                        android:layout_width="0dp"
+                        android:layout_height="40dp"
+                        android:layout_weight="1"
+                        android:background="#fff"
+                        android:hint="Cvv"
+                        android:inputType="phone"
+                        android:padding="10dp"
+                        android:textSize="18sp" />
+
+                    <View
+                        android:id="@+id/acd_lVGreyDivider"
+                        android:layout_width="3dp"
+                        android:layout_height="match_parent"
+                        android:background="#F0F0F1" />
+
+                    <EditText
+                        android:id="@+id/acd_lEtPostcode"
+                        android:layout_width="0dp"
+                        android:layout_height="40dp"
+                        android:layout_weight="1"
+                        android:background="#fff"
+                        android:hint="Postcode"
+                        android:inputType="phone"
+                        android:padding="10dp"
+                        android:textSize="18sp" />
+                </LinearLayout>
+
+                <View
+                    android:id="@+id/acd_lVGreyDivider"
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:background="#F0F0F1" />
+            </LinearLayout>
+
+            <View
+                android:id="@+id/acd_lVGreyDivider3"
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:layout_alignParentBottom="true"
+                android:background="#F0F0F1" />
+        </RelativeLayout>
+    </ScrollView>
+
+</RelativeLayout>
