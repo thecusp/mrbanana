@@ -2,9 +2,7 @@ package com.mrbanana.base;
 
 import homemade.apps.framework.homerlibs.utils.sharedpref.SharedPrefrenceHelper;
 import android.content.Context;
-import android.content.SharedPreferences;
-import android.os.Parcel;
-import android.os.Parcelable;
+import android.os.Handler;
 
 public class AppBase {
 
@@ -77,4 +75,30 @@ public class AppBase {
 
 	public static final String mStrBaseUrl = "http://mrbananaapp.com/beta/androidfeed/";
 
+	private static boolean mBoolCanResendSms = true;
+
+	public static boolean getmBoolCanResendSms() {
+		return mBoolCanResendSms;
+	}
+
+	public static void setmBoolCanResendSmsValueToFalse() {
+		AppBase.mBoolCanResendSms = false;
+		resetCanResendSmsValueToTrue();
+
+	}
+
+	public static void resetCanResendSmsValueToTrue() {
+
+		Handler handler = new Handler();
+		handler.postDelayed(new Runnable() {
+			public void run() {
+				try {
+					AppBase.mBoolCanResendSms = true;
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}, 3000);
+	}
 }

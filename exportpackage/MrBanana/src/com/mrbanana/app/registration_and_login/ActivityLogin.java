@@ -40,7 +40,7 @@ public class ActivityLogin extends ActivityBase implements OnClickListener {
 
 	String mStrForgotPasswordresponse = "init";
 	String mStrEmailForForgotPassword = "";
-	static AlertDialog alert;
+	private static AlertDialog alert;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -144,7 +144,14 @@ public class ActivityLogin extends ActivityBase implements OnClickListener {
 							mEtPassword.getText().toString().trim()));
 					String mStsResponse = Utils.postData(AppBase.mStrBaseUrl
 							+ "login", mNvp);
+
 					HomerLogger.d("login response ==" + mStsResponse);
+					HomerLogger.d("user_email =="
+							+ mEtUsername.getText().toString().trim());
+
+					HomerLogger.d("user_password =="
+							+ mEtPassword.getText().toString().trim());
+
 					parseLoginResponse(mStsResponse);
 
 				} else {

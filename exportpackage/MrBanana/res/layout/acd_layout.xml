@@ -102,40 +102,16 @@
                     android:layout_height="3dp"
                     android:background="#F0F0F1" />
 
-                <LinearLayout
-                    android:id="@+id/acd_lLlNameWrapper"
+                <EditText
+                    android:id="@+id/acd_lEtCardNo"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:background="#fff"
-                    android:orientation="horizontal" >
-
-                    <EditText
-                        android:id="@+id/acd_lEtFirstName"
-                        android:layout_width="0dp"
-                        android:layout_height="40dp"
-                        android:layout_weight="1"
-                        android:background="#fff"
-                        android:hint="First Name"
-                        android:padding="10dp"
-                        android:textSize="18sp" />
-
-                    <View
-                        android:id="@+id/acd_lVGreyDivider"
-                        android:layout_width="3dp"
-                        android:layout_height="match_parent"
-                        android:background="#F0F0F1" />
-
-                    <EditText
-                        android:id="@+id/acd_lEtLastName"
-                        android:layout_width="0dp"
-                        android:layout_height="40dp"
-                        android:layout_weight="1"
-                        android:background="#fff"
-                        android:hint="Last Name"
-                        android:inputType="phone"
-                        android:padding="10dp"
-                        android:textSize="18sp" />
-                </LinearLayout>
+                    android:hint="Enter Card No(16 digit no)"
+                    android:inputType="number"
+                    android:maxLength="16"
+                    android:padding="10dp"
+                    android:textSize="18sp" />
 
                 <View
                     android:id="@+id/acd_lVGreyDivider"
@@ -143,14 +119,14 @@
                     android:layout_height="3dp"
                     android:background="#F0F0F1" />
 
-                <EditText
-                    android:id="@+id/acd_lEtCardNo"
+                <TextView
+                    android:id="@+id/acd_lTvExpiryText"
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:background="#fff"
-                    android:hint="Enter Card No"
-                    android:maxLength="16"
+                    android:layout_height="wrap_content"
+                    android:layout_toLeftOf="@+id/acd_lIvLockIcon"
+                    android:gravity="center_vertical"
                     android:padding="10dp"
+                    android:text=" Expiry"
                     android:textSize="18sp" />
 
                 <View
@@ -167,13 +143,32 @@
                     android:orientation="horizontal" >
 
                     <EditText
-                        android:id="@+id/acd_lEtExpiry"
+                        android:id="@+id/acd_lEtExpiryMonthy"
                         android:layout_width="0dp"
                         android:layout_height="40dp"
                         android:layout_weight="1"
                         android:background="#fff"
-                        android:hint="Expiry"
-                        android:inputType="phone"
+                        android:hint="Month (mm)"
+                        android:inputType="number"
+                        android:maxLength="2"
+                        android:padding="10dp"
+                        android:textSize="18sp" />
+
+                    <View
+                        android:id="@+id/acd_lVGreyDivider"
+                        android:layout_width="3dp"
+                        android:layout_height="match_parent"
+                        android:background="#F0F0F1" />
+
+                    <EditText
+                        android:id="@+id/acd_lEtExpiryYear"
+                        android:layout_width="0dp"
+                        android:layout_height="40dp"
+                        android:layout_weight="1"
+                        android:background="#fff"
+                        android:hint="Year (yy)"
+                        android:inputType="number"
+                        android:maxLength="2"
                         android:padding="10dp"
                         android:textSize="18sp" />
 
@@ -190,24 +185,8 @@
                         android:layout_weight="1"
                         android:background="#fff"
                         android:hint="Cvv"
-                        android:inputType="phone"
-                        android:padding="10dp"
-                        android:textSize="18sp" />
-
-                    <View
-                        android:id="@+id/acd_lVGreyDivider"
-                        android:layout_width="3dp"
-                        android:layout_height="match_parent"
-                        android:background="#F0F0F1" />
-
-                    <EditText
-                        android:id="@+id/acd_lEtPostcode"
-                        android:layout_width="0dp"
-                        android:layout_height="40dp"
-                        android:layout_weight="1"
-                        android:background="#fff"
-                        android:hint="Postcode"
-                        android:inputType="phone"
+                        android:inputType="number"
+                        android:maxLength="3"
                         android:padding="10dp"
                         android:textSize="18sp" />
                 </LinearLayout>

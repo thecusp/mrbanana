@@ -31,10 +31,11 @@ import com.mrbanana.base.AppBase;
 public class ActivityVerification extends ActivityBase implements
 		OnClickListener {
 
-	TextView mTvBack, mTvSmsSentTo;
+	TextView mTvBack, mTvSmsSentTo, mTvResendSms;
 	EditText mEtCode;
 	Button mBtnContinue, mBtnSkip;
 	String mStrSmsActivationResponse = "";
+	String mStrResendSmsResponse = "";
 
 	private static boolean mBoolLoginCredentialsAvail = true;
 
@@ -64,6 +65,7 @@ public class ActivityVerification extends ActivityBase implements
 		// TODO Auto-generated method stub
 		mTvBack = (TextView) findViewById(R.id.av_lTvBack);
 		mTvSmsSentTo = (TextView) findViewById(R.id.av_lTvSmsSentToText);
+		mTvResendSms = (TextView) findViewById(R.id.av_lTvResendSms);
 
 		mEtCode = (EditText) findViewById(R.id.av_lEtCode);
 
@@ -78,6 +80,8 @@ public class ActivityVerification extends ActivityBase implements
 			mBtnContinue.setOnClickListener(this);
 			mBtnSkip.setOnClickListener(this);
 			mTvBack.setOnClickListener(this);
+
+			mTvResendSms.setOnClickListener(this);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -99,17 +103,29 @@ public class ActivityVerification extends ActivityBase implements
 			onBackPressed();
 		}
 		if (v == mBtnContinue) {
-			if (Validation.hasExactlySoManyCharecters(mEtCode, 5)) {
+			// if (Validation.hasExactlySoManyCharecters(mEtCode, 5)) {
 
+			AsyctaskSmsActivation mAtsaSmsActivateTask = new AsyctaskSmsActivation(
+					this);
+			mAtsaSmsActivateTask.execute();
+
+			// } else {
+			// AlertBoxUtils.getAlertDialogBox(this,
+			// "Enter a valid verification code").show();
+			//
+			// }
+		}
+		if (v == mTvResendSms) {
+			if (AppBase.getmBoolCanResendSms()) {
+				AsyctaskResendSms mAtrsResendSmsTask = new AsyctaskResendSms(
+						this);
+				mAtrsResendSmsTask.execute();
 			} else {
 				AlertBoxUtils.getAlertDialogBox(this,
-						"Enter a valid verification code").show();
-				AsyctaskSmsActivation mAtsaSmsActivateTask = new AsyctaskSmsActivation(
-						this);
-				mAtsaSmsActivateTask.execute();
+						"Wait 3 minutes before resending the sms").show();
+
 			}
 		}
-
 		if (v == mBtnSkip) {
 			navigateToActivity(ActivityNearby.class);
 		}
@@ -196,6 +212,96 @@ public class ActivityVerification extends ActivityBase implements
 
 		try {
 			JSONObject jsonob = new JSONObject(mStrSmsActivationResponse);
+
+			if (jsonob.has("ERROR")) {
+				return false;
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return true;
+	}
+
+	class AsyctaskResendSms extends AsyncTask<Void, Void, Void> {
+		ProgressDialog mPdDialog;
+		boolean mBoolWasInternetPresentDuringDoInBackground = false;
+		WeakReference<Context> mWrContext;
+
+		public AsyctaskResendSms(Context context) {
+			mWrContext = new WeakReference<Context>(context);
+			mPdDialog = new ProgressDialog(context);
+		}
+
+		@Override
+		protected void onPreExecute() {
+
+			mPdDialog = ProgressDialog.show(mWrContext.get(), "Alert",
+					"Loading please wait..");
+			mPdDialog.show();
+		}
+
+		@Override
+		protected Void doInBackground(Void... params) {
+
+			try {
+				if (NetworkApis.isOnline()) {
+					mBoolWasInternetPresentDuringDoInBackground = true;
+					List<NameValuePair> mNvp = new ArrayList<NameValuePair>();
+					mNvp.add(new BasicNameValuePair("user_email", AppBase
+							.getmMuUser().getmStrEmail()));
+
+					String mStsResponse = Utils.postData(AppBase.mStrBaseUrl
+							+ "resendsms", mNvp);
+					HomerLogger.d("resendsms response ==" + mStsResponse);
+					mStrResendSmsResponse = mStsResponse;
+
+				} else {
+					mBoolWasInternetPresentDuringDoInBackground = false;
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return null;
+		}
+
+		@Override
+		protected void onPostExecute(Void notUsed) {
+			try {
+
+				mPdDialog.dismiss();
+
+				if (mBoolWasInternetPresentDuringDoInBackground) {
+					if (checkIfResendSmsWorkedSuccessfully()) {
+
+						AlertBoxUtils.getAlertDialogBox(mWrContext.get(),
+								"Sms has been resent successfully. ").show();
+						AppBase.setmBoolCanResendSmsValueToFalse();
+
+					} else {
+						AlertBoxUtils.getAlertDialogBox(mWrContext.get(),
+								mStrResendSmsResponse).show();
+						;
+					}
+				} else {
+					AlertBoxUtils
+							.getAlertDialogBox(mWrContext.get(),
+									"Please check your internet connection and try again. ")
+							.show();
+					;
+				}
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+
+	private Boolean checkIfResendSmsWorkedSuccessfully() {
+
+		try {
+			JSONObject jsonob = new JSONObject(mStrResendSmsResponse);
 
 			if (jsonob.has("ERROR")) {
 				return false;

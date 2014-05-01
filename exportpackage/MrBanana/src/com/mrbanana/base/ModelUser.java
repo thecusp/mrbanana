@@ -51,6 +51,7 @@ public class ModelUser {
 	public static final String mStrKeyId = "user_id";
 
 	public static final String mStrKeyStatus = "user_status";
+	public static final String mStrKeyProfileImagePath = "profile_image_path";
 
 	public String getmStrFirstName() {
 		return mStrFirstName;

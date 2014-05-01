@@ -1,6 +1,6 @@
 package com.mrbanana.app.account.tellafrn;
 
-import homemade.apps.framework.homerlibs.utils.AlertBoxUtils;
+import homemade.apps.framework.homerlibs.utils.Utils;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -15,7 +15,7 @@ import com.mrbanana.base.ActivityBase;
 public class ActivityTellAFriend extends ActivityBase implements
 		OnClickListener {
 
-	RelativeLayout mRlEmailWrapper, mRlSmsWrapper, mRlTwitter;
+	RelativeLayout mRlEmailWrapper, mRlSmsWrapper, mRlTwitter, mRlFacebook;
 	TextView mTvBack;
 	String mStrMssageToBeShared = "Check out Mr Banana the android and ios app that lets you call a plumber or cleaner in just 2 taps,pay by cash or card.";
 
@@ -37,7 +37,7 @@ public class ActivityTellAFriend extends ActivityBase implements
 		mRlEmailWrapper = (RelativeLayout) findViewById(R.id.ataf_lLlEmail);
 		mRlSmsWrapper = (RelativeLayout) findViewById(R.id.ataf_lLlSMS);
 		mRlTwitter = (RelativeLayout) findViewById(R.id.ataf_lLlTwitter);
-
+		mRlFacebook = (RelativeLayout) findViewById(R.id.ataf_lLlFacebook);
 		mTvBack = (TextView) findViewById(R.id.ataf_lTvBack);
 
 	}
@@ -46,6 +46,7 @@ public class ActivityTellAFriend extends ActivityBase implements
 		mRlEmailWrapper.setOnClickListener(this);
 		mRlSmsWrapper.setOnClickListener(this);
 		mRlTwitter.setOnClickListener(this);
+		mRlFacebook.setOnClickListener(this);
 
 		mTvBack.setOnClickListener(this);
 	}
@@ -85,8 +86,11 @@ public class ActivityTellAFriend extends ActivityBase implements
 
 		}
 
-		if (v == mRlTwitter) {
-			AlertBoxUtils.getAlertDialogBox(this, "coming soon").show();
+		if (v == mRlTwitter || v == mRlFacebook) {
+			// AlertBoxUtils.getAlertDialogBox(this, "coming soon").show();
+
+			Utils.handleShareClickedEvent(this, "Mr Banana App",
+					mStrMssageToBeShared);
 		}
 
 		if (v == mTvBack) {

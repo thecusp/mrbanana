@@ -30,7 +30,8 @@
             android:gravity="right"
             android:padding="5dp"
             android:text="Need Help"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:visibility="invisible" />
     </LinearLayout>
 
     <LinearLayout
@@ -60,6 +61,37 @@
             android:gravity="center"
             android:padding="5dp"
             android:text="Need a cleaner now"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/anb_LlBottomBarWrapper_sub"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:visibility="gone" >
+
+        <TextView
+            android:id="@+id/anb_TvPro"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#71D220"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="Pro"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/anb_TvCha"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/selector_anb_headerbtn"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="Champion "
             android:textSize="18sp" />
     </LinearLayout>
 
