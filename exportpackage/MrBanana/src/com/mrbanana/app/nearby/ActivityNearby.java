@@ -5,13 +5,22 @@ import homemade.apps.framework.homerlibs.utils.HomerLogger;
 import homemade.apps.framework.homerlibs.utils.NetworkApis;
 import homemade.apps.framework.homerlibs.utils.Utils;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.annotation.SuppressLint;
@@ -19,6 +28,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.LinearLayout;
@@ -158,6 +168,50 @@ public class ActivityNearby extends ActivityBase implements OnClickListener {
 		}
 	}
 
+	public static void getLatLongFromAddress(String youraddress) {
+		
+		double lng, lat;
+	    String uri = "http://maps.google.com/maps/api/geocode/json?address=" +
+	                  youraddress + "&sensor=false";
+	    HttpGet httpGet = new HttpGet(uri);
+	    HttpClient client = new DefaultHttpClient();
+	    HttpResponse response;
+	    StringBuilder stringBuilder = new StringBuilder();
+
+	    try {
+	        response = client.execute(httpGet);
+	        HttpEntity entity = response.getEntity();
+	        InputStream stream = entity.getContent();
+	        int b;
+	        while ((b = stream.read()) != -1) {
+	            stringBuilder.append((char) b);
+	        }
+	    } catch (ClientProtocolException e) {
+	        e.printStackTrace();
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    }
+
+	    JSONObject jsonObject = new JSONObject();
+	    try {
+	        jsonObject = new JSONObject(stringBuilder.toString());
+
+	        lng = ((JSONArray)jsonObject.get("results")).getJSONObject(0)
+	            .getJSONObject("geometry").getJSONObject("location")
+	            .getDouble("lng");
+
+	        lat = ((JSONArray)jsonObject.get("results")).getJSONObject(0)
+	            .getJSONObject("geometry").getJSONObject("location")
+	            .getDouble("lat");
+
+	        Log.d("latitude", ""+lat);
+	        Log.d("longitude", ""+lng);
+	    } catch (JSONException e) {
+	        e.printStackTrace();
+	    }
+
+	}
+	
 	private void addLocationMarkersToMap() {
 		try {
 			Worker objNearByPlaces;
