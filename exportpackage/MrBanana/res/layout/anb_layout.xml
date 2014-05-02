@@ -39,7 +39,8 @@
         android:name="com.google.android.gms.maps.MapFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/anb_LlHeaderWrapper"/>
+        android:layout_below="@id/anb_LlHeaderWrapper"
+        android:layout_above="@+id/anb_LlBottomBarWrapper"/>
     
     <LinearLayout
         android:id="@+id/anb_LlBottomBarWrapper"
