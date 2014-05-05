@@ -31,7 +31,7 @@
             android:padding="5dp"
             android:text="Need Help"
             android:textSize="18sp"
-            android:visibility="invisible" />
+            android:visibility="visible" />
     </LinearLayout>
 	
      <fragment

@@ -101,7 +101,8 @@
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:layout_centerVertical="true"
-                        android:layout_marginRight="10dp" />
+                        android:layout_marginRight="10dp"
+                        android:visibility="gone" />
 
                     <TextView
                         android:id="@+id/aaal_lTvTellFriendsText"
@@ -312,7 +313,7 @@
                         android:layout_centerVertical="true"
                         android:layout_marginRight="10dp"
                         android:layout_toLeftOf="@+id/aaal_lTvProfileArrow"
-                        android:text="Sunny"
+                        android:text=""
                         android:textColor="#B5B5B5"
                         android:textSize="20sp"
                         android:visibility="visible" />
@@ -328,9 +329,6 @@
                         android:textColor="#B5B5B5"
                         android:textSize="30sp" />
                 </RelativeLayout>
-
-              
-                
 
                 <View
                     android:id="@+id/aaal_lVGreyDivider"
@@ -405,13 +403,15 @@
                     android:id="@+id/aaal_lVGreyDivider"
                     android:layout_width="match_parent"
                     android:layout_height="3dp"
-                    android:background="#F0F0F1" />
+                    android:background="#F0F0F1"
+                    android:visibility="gone" />
 
                 <RelativeLayout
                     android:id="@+id/aaal_lLlFeedback"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:background="#fff" >
+                    android:background="#fff"
+                    android:visibility="gone" >
 
                     <ImageView
                         android:id="@+id/aaal_lIvFeedbackIcon"
@@ -445,6 +445,60 @@
 
                     <TextView
                         android:id="@+id/aaal_lTvFeedbackArrow"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dp"
+                        android:text=">"
+                        android:textColor="#B5B5B5"
+                        android:textSize="30sp" />
+                </RelativeLayout>
+
+                <View
+                    android:id="@+id/aaal_lVGreyDivider"
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:background="#F0F0F1" />
+
+                <RelativeLayout
+                    android:id="@+id/aaal_lLlChangePassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="#fff" >
+
+                    <ImageView
+                        android:id="@+id/aaal_lIvChangePasswordIcon"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="10dp"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:id="@+id/aaal_lTvChangePasswordText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="10dp"
+                        android:layout_toRightOf="@+id/aaal_lIvChangePasswordIcon"
+                        android:text="Change Password"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/aaal_lTvChangePasswordValue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="10dp"
+                        android:layout_toLeftOf="@+id/aaal_lTvChangePasswordArrow"
+                        android:text=""
+                        android:textColor="#B5B5B5"
+                        android:textSize="20sp"
+                        android:visibility="visible" />
+
+                    <TextView
+                        android:id="@+id/aaal_lTvChangePasswordArrow"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"

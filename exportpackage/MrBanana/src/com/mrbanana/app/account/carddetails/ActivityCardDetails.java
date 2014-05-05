@@ -4,7 +4,6 @@ import homemade.apps.framework.homerlibs.utils.AlertBoxUtils;
 import homemade.apps.framework.homerlibs.utils.HomerLogger;
 import homemade.apps.framework.homerlibs.utils.NetworkApis;
 import homemade.apps.framework.homerlibs.utils.Utils;
-import homemade.apps.framework.homerlibs.utils.Validation;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -19,22 +18,21 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.EditText;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.mrbanana.R;
 import com.mrbanana.app.account.ActivityAccountActionList;
-import com.mrbanana.app.registration_and_login.ActivityVerification;
 import com.mrbanana.base.ActivityBase;
 import com.mrbanana.base.AppBase;
 
 public class ActivityCardDetails extends ActivityBase {
 	TextView mTvBack, mTvDone;
-	String mStrCardUpdateResposne = "";
-	String mStrHasCardResposne = "";
+
 	String mStrRemoveCardResposne = "";
 
-	EditText mEtCardNo, mEtCvv, mEtMonth, mEtYear;
+	TextView mTvCardNo, mTvCvv, mTvMonth, mTvYear;
+	Button mBtnRemove;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -49,24 +47,75 @@ public class ActivityCardDetails extends ActivityBase {
 	}
 
 	private void findViewByIds() {
-		mEtCardNo = (EditText) findViewById(R.id.acd_lEtCardNo);
-		mEtMonth = (EditText) findViewById(R.id.acd_lEtExpiryMonthy);
-		mEtYear = (EditText) findViewById(R.id.acd_lEtExpiryYear);
-		mEtCvv = (EditText) findViewById(R.id.acd_lEtCvv);
+		mTvCardNo = (TextView) findViewById(R.id.acd_lEtCardNo);
+		mTvMonth = (TextView) findViewById(R.id.acd_lEtExpiryMonthy);
+		mTvYear = (TextView) findViewById(R.id.acd_lEtExpiryYear);
+		mTvCvv = (TextView) findViewById(R.id.acd_lEtCvv);
 
 		mTvBack = (TextView) findViewById(R.id.acd_lTvBack);
-		mTvDone = (TextView) findViewById(R.id.acd_lTvDone);
+		mTvDone = (TextView) findViewById(R.id.acd_lTvEdit);
+
+		mBtnRemove = (Button) findViewById(R.id.acd_lBtnRemove);
 	}
 
 	private void setOnClickListenrs() {
 		// TODO Auto-generated method stub
+		mTvCardNo.addTextChangedListener(new FourDigitCardFormatWatcher());
 		mTvBack.setOnClickListener(this);
 		mTvDone.setOnClickListener(this);
+		mBtnRemove.setOnClickListener(this);
 
 	}
 
 	private void manipulateUi() {
 		mTvBack.setText("< Accounts");
+		loadUi();
+	}
+
+	private void loadUi() {
+		loadCreditCardNo();
+		loadCvvNo();
+		loadExpiryMonth();
+		loadExpiryYear();
+	}
+
+	private void loadCreditCardNo() {
+
+		String mStrStarts = "**** **** **** ";
+		String mStrLast4Digits = AppBase
+				.getmMuUser()
+				.getmStrCreditCardNo()
+				.substring(
+						AppBase.getmMuUser().getmStrCreditCardNo().length() - 4);
+
+		mTvCardNo.setText(mStrStarts + mStrLast4Digits);
+
+	}
+
+	private void loadCvvNo() {
+
+		String mStrStarts = "**";
+		String mStrLast1Digits = AppBase
+				.getmMuUser()
+				.getmStrCreditCardCvv()
+				.substring(
+						AppBase.getmMuUser().getmStrCreditCardCvv().length() - 1,
+						AppBase.getmMuUser().getmStrCreditCardCvv().length());
+
+		mTvCvv.setText(mStrStarts + mStrLast1Digits);
+
+	}
+
+	private void loadExpiryMonth() {
+
+		mTvMonth.setText(AppBase.getmMuUser().getmStrCreditCardExpiryMonth());
+
+	}
+
+	private void loadExpiryYear() {
+
+		mTvYear.setText(AppBase.getmMuUser().getmStrCreditCardExpiryYear());
+
 	}
 
 	@Override
@@ -77,41 +126,25 @@ public class ActivityCardDetails extends ActivityBase {
 			onBackPressed();
 		}
 		if (v == mTvDone) {
-			if (Validation.hasText(mEtCardNo) && Validation.hasText(mEtCvv)
-					&& Validation.hasText(mEtMonth)
-					&& Validation.hasText(mEtYear)) {
-				if (mEtCardNo.getText().toString().trim().length() == 16) {
-					if (mEtCvv.getText().toString().trim().length() == 3) {
-						AsyctaskUpdateCardDetils mAtucdUpdateCardTask = new AsyctaskUpdateCardDetils(
-								this);
-						mAtucdUpdateCardTask.execute();
-					} else {
-						AlertBoxUtils
-								.getAlertDialogBox(this,
-										"Please make sure you have entered 3 digit cvv no ")
-								.show();
-					}
-				} else {
-					AlertBoxUtils
-							.getAlertDialogBox(this,
-									"Please make sure you have entered 16 digit credit card no ")
-							.show();
-				}
-			} else {
-				AlertBoxUtils.getAlertDialogBox(this,
-						"Please fill in all the feilds before procedding")
-						.show();
-			}
+			navigateToActivity(ActivityCardEdit.class);
+		}
+		if (v == mBtnRemove) {
+			doOnRemoveCardButtonClicked();
 		}
 
 	}
 
-	class AsyctaskUpdateCardDetils extends AsyncTask<Void, Void, Void> {
+	private void doOnRemoveCardButtonClicked() {
+		AsyctaskRemoveCard mAtRcRemoveCardTask = new AsyctaskRemoveCard(this);
+		mAtRcRemoveCardTask.execute();
+	}
+
+	class AsyctaskRemoveCard extends AsyncTask<Void, Void, Void> {
 		ProgressDialog mPdDialog;
 		boolean mBoolWasInternetPresentDuringDoInBackground = false;
 		WeakReference<Context> mWrContext;
 
-		public AsyctaskUpdateCardDetils(Context context) {
+		public AsyctaskRemoveCard(Context context) {
 			mWrContext = new WeakReference<Context>(context);
 			mPdDialog = new ProgressDialog(context);
 		}
@@ -131,36 +164,15 @@ public class ActivityCardDetails extends ActivityBase {
 				if (NetworkApis.isOnline()) {
 					mBoolWasInternetPresentDuringDoInBackground = true;
 					List<NameValuePair> mNvp = new ArrayList<NameValuePair>();
-					mNvp.add(new BasicNameValuePair("cc_number", mEtCardNo
-							.getText().toString().trim()));
-					mNvp.add(new BasicNameValuePair("cc_month", mEtMonth
-							.getText().toString().trim()));
-					mNvp.add(new BasicNameValuePair("cc_year", mEtYear
-							.getText().toString().trim()));
-					mNvp.add(new BasicNameValuePair("cc_cvv", mEtCvv.getText()
-							.toString().trim()));
-
-					// AppBase.getmMuUser().setmStrFirstName(
-					// mEtFirstName.getText().toString().trim());
-					//
-					// AppBase.getmMuUser().setmStrLastName(
-					// mEtLastName.getText().toString().trim());
-					//
-					// AppBase.getmMuUser().setmStrEmail(
-					// mEtEmail.getText().toString().trim());
-					//
-					// AppBase.getmMuUser().setmStrPhoneNo(
-					// mEtMobileNo.getText().toString().trim());
-					//
-					// AppBase.getmMuUser().setmStrPassword(
-					// mEtPassword.getText().toString().trim());
+					mNvp.add(new BasicNameValuePair("user_id", AppBase
+							.getmMuUser().getmStrId()));
 
 					String mStsResponse = Utils.postData(AppBase.mStrBaseUrl
-							+ "updatecreditcard", mNvp);
+							+ "removecreditcard", mNvp);
 					HomerLogger
-							.d("updatecreditcard response ==" + mStsResponse);
+							.d("removecreditcard response ==" + mStsResponse);
 
-					mStrCardUpdateResposne = mStsResponse;
+					mStrRemoveCardResposne = mStsResponse;
 
 				} else {
 					mBoolWasInternetPresentDuringDoInBackground = false;
@@ -178,13 +190,13 @@ public class ActivityCardDetails extends ActivityBase {
 				mPdDialog.dismiss();
 
 				if (mBoolWasInternetPresentDuringDoInBackground) {
-					if (checkIfCardUpdationWorkedSuccessfully()) {
-
-						navigateToActivity(ActivityAccountActionList.class);
+					if (checkIfRemovedCardWorkedSuccessfully()) {
+						finish();
+						navigateToActivity(ActivityCard.class);
 
 					} else {
 						AlertBoxUtils.getAlertDialogBox(mWrContext.get(),
-								mStrCardUpdateResposne).show();
+								mStrRemoveCardResposne).show();
 					}
 				} else {
 					AlertBoxUtils
@@ -200,10 +212,10 @@ public class ActivityCardDetails extends ActivityBase {
 		}
 	}
 
-	private Boolean checkIfCardUpdationWorkedSuccessfully() {
+	private Boolean checkIfRemovedCardWorkedSuccessfully() {
 
 		try {
-			JSONObject jsonob = new JSONObject(mStrCardUpdateResposne);
+			JSONObject jsonob = new JSONObject(mStrRemoveCardResposne);
 
 			if (jsonob.has("ERROR")) {
 				return false;

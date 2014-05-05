@@ -26,9 +26,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.mrbanana.R;
-import com.mrbanana.app.MainActivity;
 import com.mrbanana.app.account.about.ActivityAbout;
-import com.mrbanana.app.account.carddetails.ActivityCardDetails;
+import com.mrbanana.app.account.carddetails.ActivityCard;
+import com.mrbanana.app.account.changepassword.ActivityChangePassword;
 import com.mrbanana.app.account.feedback.ActivitySendFeedBack;
 import com.mrbanana.app.account.profile.ActivityProfile;
 import com.mrbanana.app.account.tellafrn.ActivityTellAFriend;
@@ -42,7 +42,7 @@ public class ActivityAccountActionList extends ActivityBase implements
 
 	RelativeLayout mRlTellAFrnWrapper, mRlCardDetailsWrapper,
 			mRlTripHistoryWrapper, mRlAbout, mRlProfile, mRlFeedback,
-			mRlLogout;
+			mRlLogout, mRlChangePassword;
 	TextView mTvBack;
 	public String mStrLogoutResponse = "";
 
@@ -72,6 +72,8 @@ public class ActivityAccountActionList extends ActivityBase implements
 
 		mTvBack = (TextView) findViewById(R.id.aaal_lTvBack);
 
+		mRlChangePassword = (RelativeLayout) findViewById(R.id.aaal_lLlChangePassword);
+
 	}
 
 	private void setOnClickListeners() {
@@ -83,7 +85,7 @@ public class ActivityAccountActionList extends ActivityBase implements
 		mRlFeedback.setOnClickListener(this);
 		mRlProfile.setOnClickListener(this);
 		mRlLogout.setOnClickListener(this);
-
+		mRlChangePassword.setOnClickListener(this);
 		mTvBack.setOnClickListener(this);
 
 	}
@@ -96,7 +98,7 @@ public class ActivityAccountActionList extends ActivityBase implements
 		}
 
 		if (v == mRlCardDetailsWrapper) {
-			navigateToActivity(ActivityCardDetails.class);
+			navigateToActivity(ActivityCard.class);
 		}
 
 		if (v == mRlTripHistoryWrapper) {
@@ -119,6 +121,10 @@ public class ActivityAccountActionList extends ActivityBase implements
 
 		if (v == mTvBack) {
 			onBackPressed();
+		}
+
+		if (v == mRlChangePassword) {
+			navigateToActivity(ActivityChangePassword.class);
 		}
 	}
 

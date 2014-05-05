@@ -27,6 +27,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.mrbanana.R;
+import com.mrbanana.app.account.profile.ActivityProfile;
 import com.mrbanana.app.nearby.ActivityNearby;
 import com.mrbanana.base.ActivityBase;
 import com.mrbanana.base.AppBase;
@@ -174,7 +175,14 @@ public class ActivityLogin extends ActivityBase implements OnClickListener {
 							.equals(ModelUser.mStrValueLoginSuccessSuccess)) {
 						if (AppBase.getmMuUser().getmStrStatus().trim()
 								.equals("1")) {
-							navigateToActivity(ActivityNearby.class);
+							if (AppBase.getmMuUser().getmStrAddress1()
+									.toLowerCase().toString()
+									.equalsIgnoreCase("")) {
+								navigateToActivity(ActivityProfile.class);
+							} else {
+								navigateToActivity(ActivityNearby.class);
+							}
+
 						} else {
 							ActivityVerification
 									.setmBoolLoginCredentialsAvail(true);

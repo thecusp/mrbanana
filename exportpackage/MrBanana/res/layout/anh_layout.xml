@@ -1,0 +1,257 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/anh_lRlScreenParentLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F8F8F8" >
+
+    <ScrollView
+        android:id="@+id/anh_lSv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true" >
+
+        <RelativeLayout
+            android:id="@+id/anh_lscrollviewchild"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <LinearLayout
+                android:id="@+id/anh_lLlHeaderBarWrapper"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/anh_lTvBack"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:paddingLeft="10dp"
+                    android:text="Close"
+                    android:textColor="#3791FD"
+                    android:textSize="22sp" />
+
+                <TextView
+                    android:id="@+id/anh_lTvOr"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="  Need Help "
+                    android:textSize="22sp" />
+
+                <TextView
+                    android:id="@+id/anh_lTvNewUser"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:paddingRight="10dp"
+                    android:text="Resend SMS"
+                    android:textColor="#3791FD"
+                    android:textSize="22sp"
+                    android:visibility="invisible" />
+            </LinearLayout>
+
+            <View
+                android:id="@+id/anh_lVGreyDivider1"
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:layout_below="@+id/anh_lLlHeaderBarWrapper"
+                android:background="#F0F0F1" />
+
+            <LinearLayout
+                android:id="@+id/anh_lLlInputFeildsWrapper"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/anh_lVGreyDivider1"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp" >
+
+                <TextView
+                    android:id="@+id/anh_lTvHeaderTxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:gravity="center_vertical"
+                    android:padding="10dp"
+                    android:text=""
+                    android:textSize="18sp" />
+
+                <View
+                    android:id="@+id/anh_lVGreyDivider"
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:background="#F0F0F1"
+                    android:visibility="gone" />
+
+                <RelativeLayout
+                    android:id="@+id/anh_lLlClientTour"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="#fff"
+                    android:visibility="gone" >
+
+                    <ImageView
+                        android:id="@+id/anh_lIvClientTourIcon"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="10dp"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:id="@+id/anh_lTvClientTourText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="10dp"
+                        android:layout_toRightOf="@+id/anh_lIvTellClientTourIcon"
+                        android:text="Client Tour"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/anh_lTvTellClientTourValue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="10dp"
+                        android:layout_toRightOf="@+id/anh_lTvTellClientTourText"
+                        android:text="Enter Code"
+                        android:textColor="#B5B5B5"
+                        android:textSize="20sp"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:id="@+id/anh_lTvTellClientTourArrow"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dp"
+                        android:text=">"
+                        android:textColor="#B5B5B5"
+                        android:textSize="30sp" />
+                </RelativeLayout>
+
+                <View
+                    android:id="@+id/anh_lVGreyDivider"
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:background="#F0F0F1"
+                    android:visibility="visible" />
+
+                <RelativeLayout
+                    android:id="@+id/anh_lLlFeedback"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="#fff"
+                    android:visibility="visible" >
+
+                    <ImageView
+                        android:id="@+id/anh_lIvFeedbackIcon"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="10dp"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:id="@+id/anh_lTvFeedbackText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="10dp"
+                        android:layout_toRightOf="@+id/anh_lIvFeedbackIcon"
+                        android:text="Send Feedback"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/anh_lTvFeedbackValue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="10dp"
+                        android:layout_toLeftOf="@+id/anh_lTvFeedbackArrow"
+                        android:text=""
+                        android:textColor="#B5B5B5"
+                        android:textSize="20sp"
+                        android:visibility="visible" />
+
+                    <TextView
+                        android:id="@+id/anh_lTvFeedbackArrow"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dp"
+                        android:text=">"
+                        android:textColor="#B5B5B5"
+                        android:textSize="30sp" />
+                </RelativeLayout>
+
+                <View
+                    android:id="@+id/anh_lVGreyDivider"
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:background="#F0F0F1" />
+
+                <RelativeLayout
+                    android:id="@+id/anh_lLlNeedHelp"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="#fff"
+                    android:visibility="visible" >
+
+                    <ImageView
+                        android:id="@+id/anh_lIvNeedHelpIcon"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="10dp"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:id="@+id/anh_lTvNeedHelpText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="10dp"
+                        android:layout_toRightOf="@+id/anh_lIvNeedHelpIcon"
+                        android:text="Need Help"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/anh_lTvNeedHelpValue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="10dp"
+                        android:layout_toLeftOf="@+id/anh_lTvNeedHelpArrow"
+                        android:text=""
+                        android:textColor="#B5B5B5"
+                        android:textSize="20sp"
+                        android:visibility="visible" />
+
+                    <TextView
+                        android:id="@+id/anh_lTvNeedHelpArrow"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dp"
+                        android:text=">"
+                        android:textColor="#B5B5B5"
+                        android:textSize="30sp" />
+                </RelativeLayout>
+            </LinearLayout>
+        </RelativeLayout>
+    </ScrollView>
+
+</RelativeLayout>

@@ -67,19 +67,19 @@
                 android:layout_height="100dp"
                 android:layout_below="@+id/ap_lVGreyDivider8" >
 
-                <ImageView
-                    android:id="@+id/ap_lIvProfileImage"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_centerHorizontal="true"
-                    android:layout_margin="10dp" />
-
                 <ProgressBar
                     android:id="@+id/ap_lPbProfileImageLoading"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
+                    android:layout_margin="10dp" />
+
+                <ImageView
+                    android:id="@+id/ap_lIvProfileImage"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_centerHorizontal="true"
                     android:layout_margin="10dp" />
             </RelativeLayout>
 
@@ -240,15 +240,26 @@
                     android:padding="10dp"
                     android:textSize="18sp" />
 
+                <View
+                    android:id="@+id/ap_lVGreyDivider"
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:background="#F0F0F1" />
+
                 <EditText
                     android:id="@+id/ap_lEtAddress2"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:background="#fff"
-                    android:hint="Address"
-                    android:inputType="textPassword"
+                    android:hint="Address2"
                     android:padding="10dp"
                     android:textSize="18sp" />
+
+                <View
+                    android:id="@+id/ap_lVGreyDivider"
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:background="#F0F0F1" />
 
                 <EditText
                     android:id="@+id/ap_lEtLocation"
@@ -256,9 +267,14 @@
                     android:layout_height="40dp"
                     android:background="#fff"
                     android:hint="Your Location"
-                    android:inputType="textPassword"
                     android:padding="10dp"
                     android:textSize="18sp" />
+
+                <View
+                    android:id="@+id/ap_lVGreyDivider"
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:background="#F0F0F1" />
 
                 <EditText
                     android:id="@+id/ap_lEtPostcode"
@@ -266,7 +282,6 @@
                     android:layout_height="40dp"
                     android:background="#fff"
                     android:hint="Postcode"
-                    android:inputType="textPassword"
                     android:padding="10dp"
                     android:textSize="18sp" />
             </LinearLayout>

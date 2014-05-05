@@ -46,17 +46,20 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.mrbanana.R;
 import com.mrbanana.app.account.ActivityAccountActionList;
+import com.mrbanana.app.needhelp.ActivityNeedHelp;
 import com.mrbanana.base.ActivityBase;
 import com.mrbanana.base.AppBase;
 
 @SuppressLint("NewApi")
 public class ActivityNearby extends ActivityBase implements OnClickListener {
-	TextView mTvProfile, plumber_TxV, cleaner_TxV, pro_TxV, champion_Txv;
+	TextView mTvProfile, plumber_TxV, cleaner_TxV, pro_TxV, champion_Txv,
+			mTvNeedHelp;
 	LinearLayout sub_bottomLay;
 	private GoogleMap mMap;
 	ArrayList<Worker> workerNearByArray;
 	BitmapDescriptor home_icon;
 	int mapInfo = 0;// 1 - plumber, 2- cleanner
+	Worker mWoUser = new Worker();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -74,27 +77,31 @@ public class ActivityNearby extends ActivityBase implements OnClickListener {
 	@SuppressLint("NewApi")
 	private void findViewByIds() {
 
+		mTvNeedHelp = (TextView) findViewById(R.id.anb_TvHelp);
 		mTvProfile = (TextView) findViewById(R.id.anb_TvProfile);
 		plumber_TxV = (TextView) findViewById(R.id.anb_TvPlumber);
 		cleaner_TxV = (TextView) findViewById(R.id.anb_TvCleaner);
 		pro_TxV = (TextView) findViewById(R.id.anb_TvPro);
 		champion_Txv = (TextView) findViewById(R.id.anb_TvCha);
 		sub_bottomLay = (LinearLayout) findViewById(R.id.anb_LlBottomBarWrapper_sub);
-		mMap = ((MapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap();
+		mMap = ((MapFragment) getFragmentManager().findFragmentById(R.id.map))
+				.getMap();
 		mMap.setMyLocationEnabled(true);
 	}
 
 	private void setOnClickListeners() {
+
+		mTvNeedHelp.setOnClickListener(this);
 		mTvProfile.setOnClickListener(this);
 		plumber_TxV.setOnClickListener(this);
 		cleaner_TxV.setOnClickListener(this);
 		pro_TxV.setOnClickListener(this);
 		champion_Txv.setOnClickListener(this);
 		mMap.setOnMarkerClickListener(new OnMarkerClickListener() {
-			
+
 			@Override
 			public boolean onMarkerClick(Marker marker) {
-				System.out.println("Title:"+marker.getTitle());
+				System.out.println("Title:" + marker.getTitle());
 				return false;
 			}
 		});
@@ -160,7 +167,10 @@ public class ActivityNearby extends ActivityBase implements OnClickListener {
 				mPdDialog.dismiss();
 				addLocationMarkersToMap();
 				if (!mBoolWasInternetPresentDuringDoInBackground) {
-					AlertBoxUtils.getAlertDialogBox(mWrContext.get(),"Please check your internet connection and try again. ").show();
+					AlertBoxUtils
+							.getAlertDialogBox(mWrContext.get(),
+									"Please check your internet connection and try again. ")
+							.show();
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -169,53 +179,70 @@ public class ActivityNearby extends ActivityBase implements OnClickListener {
 	}
 
 	public static void getLatLongFromAddress(String youraddress) {
-		
+
 		double lng, lat;
-	    String uri = "http://maps.google.com/maps/api/geocode/json?address=" +
-	                  youraddress + "&sensor=false";
-	    HttpGet httpGet = new HttpGet(uri);
-	    HttpClient client = new DefaultHttpClient();
-	    HttpResponse response;
-	    StringBuilder stringBuilder = new StringBuilder();
+		String uri = "http://maps.google.com/maps/api/geocode/json?address="
+				+ youraddress + "&sensor=false";
+		HttpGet httpGet = new HttpGet(uri);
+		HttpClient client = new DefaultHttpClient();
+		HttpResponse response;
+		StringBuilder stringBuilder = new StringBuilder();
 
-	    try {
-	        response = client.execute(httpGet);
-	        HttpEntity entity = response.getEntity();
-	        InputStream stream = entity.getContent();
-	        int b;
-	        while ((b = stream.read()) != -1) {
-	            stringBuilder.append((char) b);
-	        }
-	    } catch (ClientProtocolException e) {
-	        e.printStackTrace();
-	    } catch (IOException e) {
-	        e.printStackTrace();
-	    }
+		try {
+			response = client.execute(httpGet);
+			HttpEntity entity = response.getEntity();
+			InputStream stream = entity.getContent();
+			int b;
+			while ((b = stream.read()) != -1) {
+				stringBuilder.append((char) b);
+			}
+		} catch (ClientProtocolException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 
-	    JSONObject jsonObject = new JSONObject();
-	    try {
-	        jsonObject = new JSONObject(stringBuilder.toString());
+		JSONObject jsonObject = new JSONObject();
+		try {
+			jsonObject = new JSONObject(stringBuilder.toString());
 
-	        lng = ((JSONArray)jsonObject.get("results")).getJSONObject(0)
-	            .getJSONObject("geometry").getJSONObject("location")
-	            .getDouble("lng");
+			lng = ((JSONArray) jsonObject.get("results")).getJSONObject(0)
+					.getJSONObject("geometry").getJSONObject("location")
+					.getDouble("lng");
 
-	        lat = ((JSONArray)jsonObject.get("results")).getJSONObject(0)
-	            .getJSONObject("geometry").getJSONObject("location")
-	            .getDouble("lat");
+			lat = ((JSONArray) jsonObject.get("results")).getJSONObject(0)
+					.getJSONObject("geometry").getJSONObject("location")
+					.getDouble("lat");
 
-	        Log.d("latitude", ""+lat);
-	        Log.d("longitude", ""+lng);
-	    } catch (JSONException e) {
-	        e.printStackTrace();
-	    }
+			Log.d("latitude", "" + lat);
+			Log.d("longitude", "" + lng);
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
 
 	}
-	
+
 	private void addLocationMarkersToMap() {
 		try {
+			try {
+				// first plot user
+				LatLng objLatLongUser = new LatLng(Double.parseDouble(mWoUser
+						.getmStrLat()),
+						Double.parseDouble(mWoUser.getmStrLng()));
+				mMap.addMarker(new MarkerOptions()
+						.title(mWoUser.getmStrtitle())
+						.snippet(mWoUser.getmStrWorker_type())
+						.position(objLatLongUser)
+						.icon(BitmapDescriptorFactory
+								.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
 			Worker objNearByPlaces;
 			LatLng objLatLong;
+
 			if (workerNearByArray != null) {
 				int nearByPlacesLength = workerNearByArray.size();
 				for (int counter = 0; counter < nearByPlacesLength; counter++) {
@@ -223,25 +250,25 @@ public class ActivityNearby extends ActivityBase implements OnClickListener {
 					objLatLong = new LatLng(Double.parseDouble(objNearByPlaces
 							.getmStrLat()), Double.parseDouble(objNearByPlaces
 							.getmStrLng()));
-					if (counter == 0)
-					{
-						 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(objLatLong, 13));
+					if (counter == 0) {
+						mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
+								objLatLong, 13));
 					}
-					if(objNearByPlaces.getmStrWorker_type().equalsIgnoreCase(Worker.CLEANER_TYPE))
-					{
-						mMap.addMarker(new MarkerOptions().title(
-								objNearByPlaces.getmStrtitle())
+					if (objNearByPlaces.getmStrWorker_type().equalsIgnoreCase(
+							Worker.CLEANER_TYPE)) {
+						mMap.addMarker(new MarkerOptions()
+								.title(objNearByPlaces.getmStrtitle())
 								.snippet(objNearByPlaces.getmStrWorker_type())
 								.position(objLatLong)
-								.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW)));
-					}
-					else
-					{
-						mMap.addMarker(new MarkerOptions().title(
-								objNearByPlaces.getmStrtitle())
+								.icon(BitmapDescriptorFactory
+										.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW)));
+					} else {
+						mMap.addMarker(new MarkerOptions()
+								.title(objNearByPlaces.getmStrtitle())
 								.snippet(objNearByPlaces.getmStrWorker_type())
 								.position(objLatLong)
-								.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
+								.icon(BitmapDescriptorFactory
+										.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
 					}
 				}
 				mMap.setInfoWindowAdapter(new InfoWindowAdapter() {
@@ -283,23 +310,26 @@ public class ActivityNearby extends ActivityBase implements OnClickListener {
 			if (json.has("SUCCESS")) {
 				jsonSucess = json.getJSONObject("SUCCESS");
 				if (jsonSucess.has("worker_coordinates")) {
-					workerJArray = jsonSucess
-							.getJSONArray("worker_coordinates");
+					String mStrJsonSucces = jsonSucess
+							.getString("worker_coordinates");
+
+					workerJArray = new JSONArray(mStrJsonSucces);
 					for (int i = 0; i < workerJArray.length(); i++) {
 						Worker worker = new Worker();
 						workerJson = workerJArray.getJSONObject(i);
 						if (workerJson.has("lat") && workerJson.has("lng")) {
 							worker.setmStrLat(workerJson.getString("lat"));
-							worker.setmStrLat(workerJson.getString("lng"));
+							worker.setmStrLng(workerJson.getString("lng"));
 							if (workerJson.has("title")) {
-								worker.setmStrLat(workerJson.getString("title"));
+								worker.setmStrtitle(workerJson
+										.getString("title"));
 							}
 							if (workerJson.has("description")) {
-								worker.setmStrLat(workerJson
+								worker.setmStrDescription(workerJson
 										.getString("description"));
 							}
 							if (workerJson.has("marker_img_path")) {
-								worker.setmStrLat(workerJson
+								worker.setmStrImg_Path(workerJson
 										.getString("marker_img_path"));
 							}
 							if (workerJson.has("tradesman_type")) {
@@ -310,6 +340,24 @@ public class ActivityNearby extends ActivityBase implements OnClickListener {
 						workerNearByArray.add(worker);
 					}
 				}
+
+				try {
+					if (jsonSucess.has("user_coordinates")) {
+						JSONObject mJsonObUserCord1 = jsonSucess
+								.getJSONObject("user_coordinates");
+						JSONObject mJsonObUserCord2 = mJsonObUserCord1
+								.getJSONObject("user_coordinates");
+
+						mWoUser.setmStrtitle(mJsonObUserCord2
+								.getString("title"));
+						mWoUser.setmStrImg_Path(mJsonObUserCord2
+								.getString("marker_img_path"));
+						mWoUser.setmStrLat(mJsonObUserCord2.getString("lat"));
+						mWoUser.setmStrLng(mJsonObUserCord2.getString("lng"));
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -318,7 +366,10 @@ public class ActivityNearby extends ActivityBase implements OnClickListener {
 
 	@Override
 	public void onClick(View v) {
-		// TODO Auto-generated method stub
+
+		if (v == mTvNeedHelp) {
+			navigateToActivity(ActivityNeedHelp.class);
+		}
 
 		if (v == mTvProfile) {
 			navigateToActivity(ActivityAccountActionList.class);
@@ -336,18 +387,20 @@ public class ActivityNearby extends ActivityBase implements OnClickListener {
 			champion_Txv.setText("Champion-Cleaner");
 		}
 		if (v == pro_TxV) {
-			if (mapInfo == 1) {
-
-			} else if (mapInfo == 2) {
-
-			}
+			// if (mapInfo == 1) {
+			//
+			// } else if (mapInfo == 2) {
+			//
+			// }
+			AlertBoxUtils.getAlertDialogBox(this, "book a pro").show();
 		}
 		if (v == champion_Txv) {
-			if (mapInfo == 1) {
-
-			} else if (mapInfo == 2) {
-
-			}
+			// if (mapInfo == 1) {
+			//
+			// } else if (mapInfo == 2) {
+			//
+			// }
+			AlertBoxUtils.getAlertDialogBox(this, "book a championp").show();
 		}
 
 	}

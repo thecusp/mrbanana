@@ -5,6 +5,7 @@ import com.mrbanana.R.id;
 import com.mrbanana.R.layout;
 import com.mrbanana.R.menu;
 import com.mrbanana.app.clienttour.ActivityClientTour;
+import com.mrbanana.app.registration_and_login.ActivityLogin;
 import com.mrbanana.app.registration_and_login.ActivityRegistration;
 import com.mrbanana.base.ActivityBase;
 import com.mrbanana.base.AppBase;
@@ -25,16 +26,16 @@ public class MainActivity extends ActivityBase {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
-		//Skip Tour If it has been Already Shown
-		
-//		if(AppBase.getmBoolTourHasBeenShown(this))
-//			navigateToActivity(ActivityRegistration.class);
-//		else
+
+		// Skip Tour If it has been Already Shown
+
+		if (AppBase.getmBoolTourHasBeenShown(this))
+			navigateToActivity(ActivityLogin.class);
+		else
 			navigateToActivity(ActivityClientTour.class);
-		
+
 		finish();
-			
+
 	}
 
 }

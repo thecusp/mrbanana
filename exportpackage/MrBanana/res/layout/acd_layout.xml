@@ -42,13 +42,13 @@
                     android:textSize="18sp" />
 
                 <TextView
-                    android:id="@+id/acd_lTvDone"
+                    android:id="@+id/acd_lTvEdit"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:paddingRight="10dp"
-                    android:text="Done"
+                    android:text="Edit"
                     android:textColor="#3791FD"
                     android:textSize="18sp"
                     android:visibility="visible" />
@@ -102,14 +102,14 @@
                     android:layout_height="3dp"
                     android:background="#F0F0F1" />
 
-                <EditText
+                <TextView
                     android:id="@+id/acd_lEtCardNo"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:background="#fff"
-                    android:hint="Enter Card No(16 digit no)"
-                    android:inputType="number"
-                    android:maxLength="16"
+                    android:gravity="center"
+                    android:hint="No Cardno Found"
+                    android:maxLength="19"
                     android:padding="10dp"
                     android:textSize="18sp" />
 
@@ -142,7 +142,7 @@
                     android:background="#fff"
                     android:orientation="horizontal" >
 
-                    <EditText
+                    <TextView
                         android:id="@+id/acd_lEtExpiryMonthy"
                         android:layout_width="0dp"
                         android:layout_height="40dp"
@@ -160,7 +160,7 @@
                         android:layout_height="match_parent"
                         android:background="#F0F0F1" />
 
-                    <EditText
+                    <TextView
                         android:id="@+id/acd_lEtExpiryYear"
                         android:layout_width="0dp"
                         android:layout_height="40dp"
@@ -178,7 +178,7 @@
                         android:layout_height="match_parent"
                         android:background="#F0F0F1" />
 
-                    <EditText
+                    <TextView
                         android:id="@+id/acd_lEtCvv"
                         android:layout_width="0dp"
                         android:layout_height="40dp"
@@ -196,6 +196,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="3dp"
                     android:background="#F0F0F1" />
+
+                <Button
+                    android:id="@+id/acd_lBtnRemove"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/selector_act_fragseven_getstartedbtn"
+                    android:text="Remove Card" />
             </LinearLayout>
 
             <View

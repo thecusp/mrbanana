@@ -63,11 +63,27 @@
             android:label="@string/app_name" >
         </activity>
         <activity
+            android:name=".app.account.changepassword.ActivityChangePassword"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name=".app.account.carddetails.ActivityCard"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
             android:name=".app.account.carddetails.ActivityCardDetails"
             android:label="@string/app_name" >
         </activity>
         <activity
+            android:name=".app.account.carddetails.ActivityCardEdit"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
             android:name=".app.account.about.ActivityAbout"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name=".app.needhelp.ActivityNeedHelp"
             android:label="@string/app_name" >
         </activity>
         <activity
