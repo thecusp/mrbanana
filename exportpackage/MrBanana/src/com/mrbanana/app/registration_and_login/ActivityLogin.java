@@ -39,6 +39,7 @@ public class ActivityLogin extends ActivityBase implements OnClickListener {
 	EditText mEtUsername, mEtPassword;
 	Button mBtnContinue;
 
+	String mStrLogindresponse = "init";
 	String mStrForgotPasswordresponse = "init";
 	String mStrEmailForForgotPassword = "";
 	private static AlertDialog alert;
@@ -154,7 +155,7 @@ public class ActivityLogin extends ActivityBase implements OnClickListener {
 							+ mEtPassword.getText().toString().trim());
 
 					parseLoginResponse(mStsResponse);
-
+					mStrLogindresponse = mStsResponse;
 				} else {
 					mBoolWasInternetPresentDuringDoInBackground = false;
 				}
@@ -175,11 +176,17 @@ public class ActivityLogin extends ActivityBase implements OnClickListener {
 							.equals(ModelUser.mStrValueLoginSuccessSuccess)) {
 						if (AppBase.getmMuUser().getmStrStatus().trim()
 								.equals("1")) {
+
+							AppBase.setmBoolUserIsLoggedIn(true,
+									mWrContext.get());
 							if (AppBase.getmMuUser().getmStrAddress1()
 									.toLowerCase().toString()
 									.equalsIgnoreCase("")) {
+								ActivityProfile
+										.setmBoolNavigateTonearByPageOnceDone(true);
 								navigateToActivity(ActivityProfile.class);
 							} else {
+
 								navigateToActivity(ActivityNearby.class);
 							}
 
@@ -190,8 +197,9 @@ public class ActivityLogin extends ActivityBase implements OnClickListener {
 						}
 					} else {
 						AlertBoxUtils
-								.getAlertDialogBox(mWrContext.get(),
-										"Login Was not Succesfull .Please check your credentials and Try Again ")
+								.getAlertDialogBox(
+										mWrContext.get(),
+										AppBase.retriveMsgsfromResponse(mStrLogindresponse))
 								.show();
 						;
 					}
@@ -210,10 +218,10 @@ public class ActivityLogin extends ActivityBase implements OnClickListener {
 	}
 
 	private void parseLoginResponse(String mStrResponse) {
-		AppBase.getmMuUser().setmStrLoginResponse(mStrResponse);
+		AppBase.getmMuUser().setmStrLoginResponse(mStrResponse, this);
 
 		AppBase.getmMuUser().fromString(
-				AppBase.getmMuUser().getmStrLoginResponse());
+				AppBase.getmMuUser().getmStrLoginResponse(this), this);
 	}
 
 	class AsyctaskForgotPassword extends AsyncTask<Void, Void, Void> {
@@ -274,8 +282,11 @@ public class ActivityLogin extends ActivityBase implements OnClickListener {
 						;
 
 					} else {
-						AlertBoxUtils.getAlertDialogBox(mWrContext.get(),
-								mStrForgotPasswordresponse).show();
+						AlertBoxUtils
+								.getAlertDialogBox(
+										mWrContext.get(),
+										AppBase.retriveMsgsfromResponse(mStrForgotPasswordresponse))
+								.show();
 						;
 					}
 				} else {
@@ -359,5 +370,10 @@ public class ActivityLogin extends ActivityBase implements OnClickListener {
 		alert = builder.create();
 
 		return alert;
+	}
+
+	@Override
+	public void onBackPressed() {
+
 	}
 }

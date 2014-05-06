@@ -32,7 +32,7 @@ public class ActivityCardDetails extends ActivityBase {
 	String mStrRemoveCardResposne = "";
 
 	TextView mTvCardNo, mTvCvv, mTvMonth, mTvYear;
-	Button mBtnRemove;
+	Button mBtnRemove, mBtnEdit;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +56,7 @@ public class ActivityCardDetails extends ActivityBase {
 		mTvDone = (TextView) findViewById(R.id.acd_lTvEdit);
 
 		mBtnRemove = (Button) findViewById(R.id.acd_lBtnRemove);
+		mBtnEdit = (Button) findViewById(R.id.acd_lBtnEdit);
 	}
 
 	private void setOnClickListenrs() {
@@ -64,6 +65,7 @@ public class ActivityCardDetails extends ActivityBase {
 		mTvBack.setOnClickListener(this);
 		mTvDone.setOnClickListener(this);
 		mBtnRemove.setOnClickListener(this);
+		mBtnEdit.setOnClickListener(this);
 
 	}
 
@@ -125,7 +127,7 @@ public class ActivityCardDetails extends ActivityBase {
 		if (v == mTvBack) {
 			onBackPressed();
 		}
-		if (v == mTvDone) {
+		if (v == mTvDone || v == mBtnEdit) {
 			navigateToActivity(ActivityCardEdit.class);
 		}
 		if (v == mBtnRemove) {
@@ -195,8 +197,11 @@ public class ActivityCardDetails extends ActivityBase {
 						navigateToActivity(ActivityCard.class);
 
 					} else {
-						AlertBoxUtils.getAlertDialogBox(mWrContext.get(),
-								mStrRemoveCardResposne).show();
+						AlertBoxUtils
+								.getAlertDialogBox(
+										mWrContext.get(),
+										AppBase.retriveMsgsfromResponse(mStrRemoveCardResposne))
+								.show();
 					}
 				} else {
 					AlertBoxUtils

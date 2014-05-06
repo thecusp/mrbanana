@@ -1,0 +1,160 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ath_d_lRlScreenParentLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F8F8F8" >
+
+    <ScrollView
+        android:id="@+id/ath_d_lSv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true" >
+
+        <RelativeLayout
+            android:id="@+id/ath_d_lscrollviewchild"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <RelativeLayout
+                android:id="@+id/ath_d_lRlHeaderWrapper"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp" >
+
+                <TextView
+                    android:id="@+id/ath_d_lTvBack"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="left|center_vertical"
+                    android:paddingLeft="10dp"
+                    android:text="Listings"
+                    android:textColor="#3791FD"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/ath_d_lTvCarddetails"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text=" Work history "
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/ath_d_lTvEdit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:paddingRight="10dp"
+                    android:text="Edit"
+                    android:textColor="#3791FD"
+                    android:textSize="18sp"
+                    android:visibility="gone" />
+            </RelativeLayout>
+
+            <View
+                android:id="@+id/ath_d_lVGreyDivider1"
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:layout_below="@+id/ath_d_lRlHeaderWrapper"
+                android:background="#F0F0F1" />
+
+            <LinearLayout
+                android:id="@+id/ath_d_lLlInputFeildsWrapper"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ath_d_lRlHeaderWrapper"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp" >
+
+                <View
+                    android:id="@+id/ath_d_lVGreyDivider"
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:background="#F0F0F1" />
+
+                <TextView
+                    android:id="@+id/ath_d_lTvFirstName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:text=" "
+                    android:textSize="18sp" />
+
+                <View
+                    android:id="@+id/ath_d_lVGreyDivider"
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:background="#F0F0F1" />
+
+                <TextView
+                    android:id="@+id/ath_d_lTvLastName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:text=" "
+                    android:textSize="18sp" />
+
+                <View
+                    android:id="@+id/ath_d_lVGreyDivider"
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:background="#F0F0F1" />
+
+                <TextView
+                    android:id="@+id/ath_d_lTvTradesmanType"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:text=" "
+                    android:textSize="18sp" />
+
+                <View
+                    android:id="@+id/ath_d_lVGreyDivider"
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:background="#F0F0F1" />
+
+                <TextView
+                    android:id="@+id/ath_d_lTvTradesmanLevel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:text=" "
+                    android:textSize="18sp" />
+
+                <View
+                    android:id="@+id/ath_d_lVGreyDivider"
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:background="#F0F0F1" />
+
+                <TextView
+                    android:id="@+id/ath_d_lTvJobStatus"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:text=" "
+                    android:textSize="18sp" />
+            </LinearLayout>
+
+            <View
+                android:id="@+id/ath_d_lVGreyDivider3"
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:layout_alignParentBottom="true"
+                android:background="#F0F0F1" />
+        </RelativeLayout>
+    </ScrollView>
+
+</RelativeLayout>

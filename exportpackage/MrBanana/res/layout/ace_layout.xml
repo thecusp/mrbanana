@@ -51,7 +51,7 @@
                     android:text="Done"
                     android:textColor="#3791FD"
                     android:textSize="18sp"
-                    android:visibility="visible" />
+                    android:visibility="gone" />
             </RelativeLayout>
 
             <View
@@ -84,7 +84,7 @@
                         android:layout_toLeftOf="@+id/ace_lIvLockIcon"
                         android:gravity="center_vertical"
                         android:padding="10dp"
-                        android:text=" No hidden charges fully secure."
+                        android:text=" No hidden charges fully secured."
                         android:textSize="18sp" />
 
                     <ImageView
@@ -196,6 +196,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="3dp"
                     android:background="#F0F0F1" />
+					
+					 <Button
+                        android:id="@+id/ace_lBtnSave"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:background="@drawable/selector_act_fragseven_getstartedbtn"
+                        android:text="Save" />
             </LinearLayout>
 
             <View

@@ -1,8 +1,10 @@
 package com.mrbanana.app.account;
 
+import homemade.apps.framework.homerlibs.utils.AlertBoxUtils;
 import homemade.apps.framework.homerlibs.utils.HomerLogger;
 import homemade.apps.framework.homerlibs.utils.NetworkApis;
 import homemade.apps.framework.homerlibs.utils.Utils;
+import homemade.apps.framework.homerlibs.utils.Validation;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -12,6 +14,7 @@ import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONObject;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -21,6 +24,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,6 +37,7 @@ import com.mrbanana.app.account.feedback.ActivitySendFeedBack;
 import com.mrbanana.app.account.profile.ActivityProfile;
 import com.mrbanana.app.account.tellafrn.ActivityTellAFriend;
 import com.mrbanana.app.account.triphistory.Activityhistory;
+import com.mrbanana.app.needhelp.ActivityNeedHelp;
 import com.mrbanana.app.registration_and_login.ActivityLogin;
 import com.mrbanana.base.ActivityBase;
 import com.mrbanana.base.AppBase;
@@ -47,6 +52,10 @@ public class ActivityAccountActionList extends ActivityBase implements
 	public String mStrLogoutResponse = "";
 
 	private static AlertDialog alert;
+
+	private static AlertDialog alert2;
+	public String mStrSendFeedbackResponse = "";
+	public String mStrSendFeedbackIssue = "";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -116,7 +125,8 @@ public class ActivityAccountActionList extends ActivityBase implements
 			navigateToActivity(ActivityProfile.class);
 		}
 		if (v == mRlFeedback) {
-			navigateToActivity(ActivitySendFeedBack.class);
+			// navigateToActivity(ActivitySendFeedBack.class);
+			getAlertDialogBoxForCommentBoxSendFeedback(this).show();
 		}
 
 		if (v == mTvBack) {
@@ -193,6 +203,7 @@ public class ActivityAccountActionList extends ActivityBase implements
 							Toast.LENGTH_SHORT).show();
 				}
 
+				AppBase.setmBoolUserIsLoggedIn(false, mWrContext.get());
 				Intent intent = new Intent(mWrContext.get(),
 						ActivityLogin.class);
 				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -266,4 +277,155 @@ public class ActivityAccountActionList extends ActivityBase implements
 
 		return alert;
 	}
+
+	public AlertDialog getAlertDialogBoxForCommentBoxSendFeedback(
+			Activity context) {
+		final AsyctaskSendfeedback mAtnhSendFeedbackTask = new AsyctaskSendfeedback(
+				this);
+		AlertDialog.Builder builder = new AlertDialog.Builder(context);
+		builder.setTitle("Comment Box");
+		final EditText et = new EditText(context);
+		et.setHint("Enter Text Here .");
+		et.setHeight(Utils.getDipValuefor(this, 200));
+		builder.setView(et)
+				.setPositiveButton("Submit",
+						new DialogInterface.OnClickListener() {
+
+							@Override
+							public void onClick(final DialogInterface dialog,
+									int which) {
+								if (Validation.hasText(et)) {
+									dialog.dismiss();
+
+									mStrSendFeedbackIssue = et.getText()
+											.toString().trim();
+									mAtnhSendFeedbackTask.execute();
+
+								} else {
+									et.setHint("Please enter text before proceeding ");
+								}
+
+							}
+						})
+				.setNegativeButton("Cancel",
+						new DialogInterface.OnClickListener() {
+
+							@Override
+							public void onClick(DialogInterface dialog,
+									int which) {
+								dialog.dismiss();
+
+							}
+						});
+
+		builder.setOnCancelListener(new DialogInterface.OnCancelListener() {
+			@Override
+			public void onCancel(DialogInterface dialog) {
+
+			}
+
+		});
+
+		alert2 = builder.create();
+
+		return alert2;
+	}
+
+	class AsyctaskSendfeedback extends AsyncTask<Void, Void, Void> {
+		ProgressDialog mPdDialog;
+		boolean mBoolWasInternetPresentDuringDoInBackground = false;
+		WeakReference<Context> mWrContext;
+
+		public AsyctaskSendfeedback(Context context) {
+			mWrContext = new WeakReference<Context>(context);
+			mPdDialog = new ProgressDialog(context);
+		}
+
+		@Override
+		protected void onPreExecute() {
+
+			mPdDialog = ProgressDialog.show(mWrContext.get(), "Alert",
+					"Loading please wait..");
+			mPdDialog.show();
+		}
+
+		@Override
+		protected Void doInBackground(Void... params) {
+
+			try {
+				if (NetworkApis.isOnline()) {
+					mBoolWasInternetPresentDuringDoInBackground = true;
+					List<NameValuePair> mNvp = new ArrayList<NameValuePair>();
+					mNvp.add(new BasicNameValuePair("user_id", AppBase
+							.getmMuUser().getmStrId()));
+
+					mNvp.add(new BasicNameValuePair("issue_message",
+							mStrSendFeedbackIssue));
+					String mStsResponse = Utils.postData(AppBase.mStrBaseUrl
+							+ "feedback", mNvp);
+
+					HomerLogger.d("feedback response ==" + mStsResponse);
+					mStrSendFeedbackResponse = mStsResponse;
+				} else {
+					mBoolWasInternetPresentDuringDoInBackground = false;
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return null;
+		}
+
+		@Override
+		protected void onPostExecute(Void notUsed) {
+			try {
+
+				mPdDialog.dismiss();
+
+				if (mBoolWasInternetPresentDuringDoInBackground) {
+
+					// if (checkSendFeedBackWasSuccessfullyExecuted()) {
+					//
+					// } else {
+					// AlertBoxUtils
+					// .getAlertDialogBox(mWrContext.get(),
+					// "Send feedback could not be contacted for some reason .Try Again ")
+					// .show();
+					// ;
+					// }
+
+					AlertBoxUtils
+							.getAlertDialogBox(
+									mWrContext.get(),
+									AppBase.retriveMsgsfromResponse(mStrSendFeedbackResponse))
+							.show();
+				} else {
+					AlertBoxUtils
+							.getAlertDialogBox(mWrContext.get(),
+									"Please check your internet connection and try again. ")
+							.show();
+					;
+				}
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+
+	private Boolean checkSendFeedBackWasSuccessfullyExecuted() {
+
+		try {
+			JSONObject jsonob = new JSONObject(mStrSendFeedbackResponse);
+
+			if (jsonob.has("ERROR")) {
+				return false;
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return true;
+	}
+
 }

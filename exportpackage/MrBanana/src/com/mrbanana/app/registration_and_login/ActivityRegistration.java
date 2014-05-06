@@ -22,6 +22,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnKeyListener;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
@@ -32,6 +33,7 @@ import com.mrbanana.app.nearby.ActivityNearby;
 import com.mrbanana.base.ActivityBase;
 import com.mrbanana.base.AppBase;
 import com.mrbanana.base.ModelUser;
+import com.mrbanana.base.PlacesAutoCompleteAdapter;
 
 public class ActivityRegistration extends ActivityBase implements
 		OnClickListener {
@@ -40,8 +42,11 @@ public class ActivityRegistration extends ActivityBase implements
 
 	RelativeLayout mRlLoginBtn;
 
-	EditText mEtFirstName, mEtLastName, mEtPassword, mEtMobileNo, mEtEmail;
+	EditText mEtFirstName, mEtLastName, mEtPassword, mEtMobileNo, mEtEmail,
+			mEtAddress1, mEtAddress2;
 	Button mBtnContinue;
+
+	AutoCompleteTextView mEtLocation;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +71,10 @@ public class ActivityRegistration extends ActivityBase implements
 		mEtMobileNo = (EditText) findViewById(R.id.areg_lEtMobile);
 		mEtEmail = (EditText) findViewById(R.id.areg_lEtEmail);
 
+		mEtAddress1 = (EditText) findViewById(R.id.areg_lEtAddress1);
+		mEtAddress2 = (EditText) findViewById(R.id.areg_lEtAddress2);
+		mEtLocation = (AutoCompleteTextView) findViewById(R.id.areg_lEtLocation);
+
 		mBtnContinue = (Button) findViewById(R.id.areg_lBtnContinue);
 
 	}
@@ -80,9 +89,16 @@ public class ActivityRegistration extends ActivityBase implements
 
 	private void manipulateUi() {
 		// TODO Auto-generated method stub
+		
+		
+		mEtLocation.setAdapter(new PlacesAutoCompleteAdapter(this,
+				R.layout.areg_location_actv_item));
 		setKeyListenersToInputFeilds(mEtFirstName, mEtEmail);
 		setKeyListenersToInputFeilds(mEtEmail, mEtMobileNo);
 		setKeyListenersToInputFeilds(mEtMobileNo, mEtPassword);
+		setKeyListenersToInputFeilds(mEtPassword, mEtAddress1);
+		setKeyListenersToInputFeilds(mEtAddress1, mEtAddress2);
+		setKeyListenersToInputFeilds(mEtAddress2, mEtLocation);
 
 	}
 
@@ -119,13 +135,15 @@ public class ActivityRegistration extends ActivityBase implements
 					&& Utils.textHasBeenEnteredInTextBox(mEtMobileNo)
 					&& Utils.textHasBeenEnteredInTextBox(mEtPassword)
 					&& Utils.textHasBeenEnteredInTextBox(mEtFirstName)
-					&& Utils.textHasBeenEnteredInTextBox(mEtLastName)) {
+					&& Utils.textHasBeenEnteredInTextBox(mEtLastName)
+					&& Utils.textHasBeenEnteredInTextBox(mEtAddress1)
+					&& Utils.textHasBeenEnteredInTextBox(mEtLocation)) {
 				if (Validation.isEmailAddress(mEtEmail, true)) {
 
 					if (Validation.hasExactlySoManyCharecters(mEtMobileNo, 10)) {
 
 						if (Validation.hasAtleastSoManyCharecters(mEtPassword,
-								6)
+								3)
 								&& Validation.hasAtTheMaxSoManyCharecters(
 										mEtPassword, 36)) {
 
@@ -193,6 +211,13 @@ public class ActivityRegistration extends ActivityBase implements
 					mNvp.add(new BasicNameValuePair("mobile_number",
 							mEtMobileNo.getText().toString().trim()));
 
+					mNvp.add(new BasicNameValuePair("address1", mEtAddress1
+							.getText().toString().trim()));
+					mNvp.add(new BasicNameValuePair("address2", mEtAddress2
+							.getText().toString().trim()));
+					mNvp.add(new BasicNameValuePair("user_location",
+							mEtLocation.getText().toString().trim()));
+
 					AppBase.getmMuUser().setmStrFirstName(
 							mEtFirstName.getText().toString().trim());
 
@@ -207,6 +232,13 @@ public class ActivityRegistration extends ActivityBase implements
 
 					AppBase.getmMuUser().setmStrPassword(
 							mEtPassword.getText().toString().trim());
+
+					AppBase.getmMuUser().setmStrAddress1(
+							mEtAddress1.getText().toString().trim());
+					AppBase.getmMuUser().setmStrAddress2(
+							mEtAddress2.getText().toString().trim());
+					AppBase.getmMuUser().setmStrLocation(
+							mEtLocation.getText().toString().trim());
 
 					String mStsResponse = Utils.postData(AppBase.mStrBaseUrl
 							+ "register", mNvp);
@@ -236,8 +268,11 @@ public class ActivityRegistration extends ActivityBase implements
 						navigateToActivity(ActivityVerification.class);
 
 					} else {
-						AlertBoxUtils.getAlertDialogBox(mWrContext.get(),
-								mStrRegisterResponse).show();
+						AlertBoxUtils
+								.getAlertDialogBox(
+										mWrContext.get(),
+										AppBase.retriveMsgsfromResponse(mStrRegisterResponse))
+								.show();
 					}
 				} else {
 					AlertBoxUtils
@@ -267,5 +302,10 @@ public class ActivityRegistration extends ActivityBase implements
 		}
 
 		return false;
+	}
+
+	@Override
+	public void onBackPressed() {
+
 	}
 }

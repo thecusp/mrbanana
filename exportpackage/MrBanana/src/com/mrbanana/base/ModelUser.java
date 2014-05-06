@@ -1,8 +1,12 @@
 package com.mrbanana.base;
 
+import homemade.apps.framework.homerlibs.utils.sharedpref.SharedPrefrenceHelper;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import android.content.Context;
 
 public class ModelUser {
 
@@ -12,7 +16,7 @@ public class ModelUser {
 	String mStrPhoneNo = "";
 	String mStrPassword = "";
 	String mStrId = "";
-	String mStrLoginResponse = "";
+	String mStrLoginResponse = null;
 	String mStrStatus = "";
 	String mStrLoginSucces = "notYet";
 
@@ -26,6 +30,19 @@ public class ModelUser {
 	String mStrCreditCardNo = "";
 
 	String mStrProfileImagePath = "";
+
+	public ModelUser() {
+
+	}
+
+	public ModelUser(Context context) {
+		try {
+			fromString(getmStrLoginResponse(context), context);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 	public String getmStrProfileImagePath() {
 		return mStrProfileImagePath;
@@ -79,12 +96,24 @@ public class ModelUser {
 		this.mStrStatus = mStrStatus;
 	}
 
-	public String getmStrLoginResponse() {
+	public String getmStrLoginResponse(Context context) {
+
+		if (mStrLoginResponse == null) {
+			mStrLoginResponse = SharedPrefrenceHelper.getPref(context,
+					AppBase.mStrPrefNameBase).getString(
+					AppBase.mStrPrefKeyLoginResponse, "");
+		}
 		return mStrLoginResponse;
 	}
 
-	public void setmStrLoginResponse(String mStrLoginResponse) {
-		this.mStrLoginResponse = mStrLoginResponse;
+	public void setmStrLoginResponse(String mStrLoginResponse, Context context) {
+
+		SharedPrefrenceHelper.getPref(context, AppBase.mStrPrefNameBase).edit()
+				.putString(AppBase.mStrPrefKeyLoginResponse, mStrLoginResponse)
+				.commit();
+
+		this.mStrLoginResponse = null;
+		getmStrLoginResponse(context);
 	}
 
 	public static final String mStrValueLoginSuccessNotYet = "Notyet";
@@ -95,6 +124,7 @@ public class ModelUser {
 	}
 
 	public void setmStrLoginSucces(String mStrLoginSucces) {
+
 		this.mStrLoginSucces = mStrLoginSucces;
 	}
 
@@ -222,14 +252,14 @@ public class ModelUser {
 			json.put(mStrKeyId, mStrId);
 
 			arr.put(json);
-			Whole.put("SUCCESS", arr);
+			Whole.put("SUCCESS", arr.toString());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return json.toString();
 	}
 
-	public void fromString(String mStr) {
+	public void fromString(String mStr, Context context) {
 		try {
 
 			JSONObject json = new JSONObject(mStr);
@@ -326,10 +356,8 @@ public class ModelUser {
 
 				setmStrProfileImagePath(jsonObSuccessArrFirstKey
 						.getString(mStrKeyProfileImagePath));
-
 				setmStrLoginSucces(mStrValueLoginSuccessSuccess);
 			} else {
-				setmStrLoginSucces(mStrValueLoginSuccessNotYet);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -354,9 +382,7 @@ public class ModelUser {
 				setmStrCreditCardCvv(jsonObSuccessArrFirstKey
 						.getString(mStrKeyCcCvv));
 
-				setmStrLoginSucces(mStrValueLoginSuccessSuccess);
 			} else {
-				setmStrLoginSucces(mStrValueLoginSuccessNotYet);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

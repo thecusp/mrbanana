@@ -8,8 +8,7 @@ import homemade.apps.framework.homerlibs.utils.Validation;
 import homemade.apps.framework.homerlibs.utils.imageloader.ImageLoader;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -37,6 +36,7 @@ import android.os.Looper;
 import android.provider.MediaStore;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -44,13 +44,16 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.mrbanana.R;
+import com.mrbanana.app.nearby.ActivityNearby;
 import com.mrbanana.base.ActivityBase;
 import com.mrbanana.base.AppBase;
+import com.mrbanana.base.PlacesAutoCompleteAdapter;
 
 public class ActivityProfile extends ActivityBase {
 
 	EditText mEtFirstName, mEtLastName, mEtPhone, mEtAddress1, mEtAddress2,
-			mEtPostCode, mEtLocation;
+			mEtPostCode;
+	AutoCompleteTextView mEtLocation;
 	RelativeLayout mRlGenderWrapper;
 	TextView mTvGenderValue, mTvBack, mTvDone;
 
@@ -63,12 +66,23 @@ public class ActivityProfile extends ActivityBase {
 
 	String mStrUploadImageResposne = "";
 
+	private static Boolean mBoolNavigateTonearByPageOnceDone = false;
+
+	public static Boolean getmBoolNavigateTonearByPageOnceDone() {
+		return mBoolNavigateTonearByPageOnceDone;
+	}
+
+	public static void setmBoolNavigateTonearByPageOnceDone(
+			Boolean mBoolNavigateTonearByPageOnceDone) {
+		ActivityProfile.mBoolNavigateTonearByPageOnceDone = mBoolNavigateTonearByPageOnceDone;
+	}
+
 	private static final int PICK_FROM_CAMERA = 1;
 	private static final int PICK_FROM_FILE = 3;
 	private static final int SELECT_PICTURE = 0;
 
 	public static final String mStrValueGenderMale = "Male";
-	public static final String mStrValueGenderFeMale = "FeMale";
+	public static final String mStrValueGenderFeMale = "Female";
 	public static final String[] mStrArrValuesDropDownGenders = {
 			mStrValueGenderMale, mStrValueGenderFeMale };
 
@@ -95,7 +109,7 @@ public class ActivityProfile extends ActivityBase {
 		mEtPhone = (EditText) findViewById(R.id.ap_lEtMobile);
 		mEtAddress1 = (EditText) findViewById(R.id.ap_lEtAddress1);
 		mEtAddress2 = (EditText) findViewById(R.id.ap_lEtAddress2);
-		mEtLocation = (EditText) findViewById(R.id.ap_lEtLocation);
+		mEtLocation = (AutoCompleteTextView) findViewById(R.id.ap_lEtLocation);
 		mEtPostCode = (EditText) findViewById(R.id.ap_lEtPostcode);
 
 		mIvProfilePic = (ImageView) findViewById(R.id.ap_lIvProfileImage);
@@ -117,6 +131,14 @@ public class ActivityProfile extends ActivityBase {
 
 	private void manipulateUi() {
 		// TODO Auto-generated method stub
+
+		try {
+			mEtLocation.setAdapter(new PlacesAutoCompleteAdapter(this,
+					R.layout.areg_location_actv_item));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		mTvBack.setText("< Accounts");
 		doOnGenderSelected(0);
 		AsyctaskMyProfile mAtmpMyProfileTask = new AsyctaskMyProfile(this);
@@ -180,11 +202,14 @@ public class ActivityProfile extends ActivityBase {
 
 	private void doOnDonePressed() {
 
-		onBackPressed();
+		finish();
 		AsyctaskUpdateProfile mAtupUpdateProfileTask = new AsyctaskUpdateProfile(
 				this);
 		mAtupUpdateProfileTask.execute();
-
+		if (mBoolNavigateTonearByPageOnceDone) {
+			navigateToActivity(ActivityNearby.class);
+		}
+		mBoolNavigateTonearByPageOnceDone = false;
 	}
 
 	protected void showSelectGenderDialog() {
@@ -250,10 +275,10 @@ public class ActivityProfile extends ActivityBase {
 				if (item == 0) {
 					Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
-					mImageCaptureUri = Uri.fromFile(new File(Environment
-							.getExternalStorageDirectory(), "tmp_avatar_"
-							+ String.valueOf(System.currentTimeMillis())
-							+ ".jpg"));
+					mImageCaptureUri = Uri.fromFile(new File(
+							getExternalFilesDir(null), "profilepic"
+							// + String.valueOf(System.currentTimeMillis())
+									+ ".jpg"));
 
 					intent.putExtra(android.provider.MediaStore.EXTRA_OUTPUT,
 							mImageCaptureUri);
@@ -305,6 +330,23 @@ public class ActivityProfile extends ActivityBase {
 						Bitmap scaled = Bitmap.createScaledBitmap(bitmap, 512,
 								nh, true);
 
+						// String extStorageDirectory =
+						// Environment.getExternalStorageDirectory().toString();
+						FileOutputStream outStream = null;
+						File file = new File(getExternalFilesDir(null),
+								"profilepic"
+								// + String.valueOf(System.currentTimeMillis())
+										+ ".jpg");
+						try {
+							outStream = new FileOutputStream(file);
+							scaled.compress(Bitmap.CompressFormat.JPEG, 100,
+									outStream);
+							outStream.flush();
+							outStream.close();
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+
 						mIvProfilePic.setImageBitmap(scaled);
 					}
 
@@ -322,6 +364,21 @@ public class ActivityProfile extends ActivityBase {
 					Bitmap scaled = Bitmap.createScaledBitmap(bitmap, 512, nh,
 							true);
 
+					FileOutputStream outStream = null;
+					File file = new File(getExternalFilesDir(null),
+							"profilepic"
+							// + String.valueOf(System.currentTimeMillis())
+									+ ".jpg");
+					try {
+						outStream = new FileOutputStream(file);
+						scaled.compress(Bitmap.CompressFormat.JPEG, 100,
+								outStream);
+						outStream.flush();
+						outStream.close();
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+
 					mIvProfilePic.setImageBitmap(scaled);
 				}
 
@@ -336,6 +393,19 @@ public class ActivityProfile extends ActivityBase {
 				int nh = (int) (bitmap.getHeight() * (512.0 / bitmap.getWidth()));
 				Bitmap scaled = Bitmap
 						.createScaledBitmap(bitmap, 512, nh, true);
+
+				FileOutputStream outStream = null;
+				File file = new File(getExternalFilesDir(null), "profilepic"
+				// + String.valueOf(System.currentTimeMillis())
+						+ ".jpg");
+				try {
+					outStream = new FileOutputStream(file);
+					scaled.compress(Bitmap.CompressFormat.JPEG, 100, outStream);
+					outStream.flush();
+					outStream.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 
 				mIvProfilePic.setImageBitmap(scaled);
 
@@ -462,7 +532,7 @@ public class ActivityProfile extends ActivityBase {
 					} else {
 						AlertBoxUtils
 								.getAlertDialogBox(mWrContext.get(),
-										"Opps .!! Could not load your profile Please try again later.")
+										" Could not refetch your  profile Please try again later.")
 								.show();
 						;
 					}
@@ -587,8 +657,11 @@ public class ActivityProfile extends ActivityBase {
 								mWrContext.get());
 						mAtmpMyProfiletask.execute();
 					} else {
-						AlertBoxUtils.getAlertDialogBox(mWrContext.get(),
-								mStrUpdateProfileResposne).show();
+						AlertBoxUtils
+								.getAlertDialogBox(
+										mWrContext.get(),
+										AppBase.retriveMsgsfromResponse(mStrUpdateProfileResposne))
+								.show();
 						;
 					}
 				} else {
@@ -642,7 +715,7 @@ public class ActivityProfile extends ActivityBase {
 		protected Void doInBackground(Void... params) {
 
 			try {
-				Looper.prepare();
+				// Looper.prepare();
 				if (NetworkApis.isOnline()) {
 
 					mBoolWasInternetPresentDuringDoInBackground = true;
@@ -653,8 +726,13 @@ public class ActivityProfile extends ActivityBase {
 
 					String mStsResponse = Utils
 							.executeHttpPostWithMultiPartEntity(
-									AppBase.mStrBaseUrl + "uploadimage", mNvp,
-									fetchPathFromUri(mImageCaptureUri),
+									AppBase.mStrBaseUrl + "uploadimage",
+									mNvp,
+									new File(getExternalFilesDir(null),
+											"profilepic"
+											// +
+											// String.valueOf(System.currentTimeMillis())
+													+ ".jpg").getAbsolutePath(),
 									"profilepic.jpg", "user_img");
 
 					HomerLogger.d("uploadimage response ==" + mStsResponse);
@@ -682,8 +760,11 @@ public class ActivityProfile extends ActivityBase {
 								mWrContext.get());
 						mAtmpMyProfiletask.execute();
 					} else {
-						AlertBoxUtils.getAlertDialogBox(mWrContext.get(),
-								mStrUploadImageResposne).show();
+						AlertBoxUtils
+								.getAlertDialogBox(
+										mWrContext.get(),
+										AppBase.retriveMsgsfromResponse(mStrUploadImageResposne))
+								.show();
 						;
 					}
 				} else {

@@ -19,12 +19,11 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import com.mrbanana.R;
-import com.mrbanana.app.account.ActivityAccountActionList;
-import com.mrbanana.app.registration_and_login.ActivityVerification;
 import com.mrbanana.base.ActivityBase;
 import com.mrbanana.base.AppBase;
 
@@ -35,6 +34,7 @@ public class ActivityCardEdit extends ActivityBase {
 	String mStrRemoveCardResposne = "";
 
 	EditText mEtCardNo, mEtCvv, mEtMonth, mEtYear;
+	Button mBtnSave;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +56,8 @@ public class ActivityCardEdit extends ActivityBase {
 
 		mTvBack = (TextView) findViewById(R.id.ace_lTvBack);
 		mTvDone = (TextView) findViewById(R.id.ace_lTvDone);
+
+		mBtnSave = (Button) findViewById(R.id.ace_lBtnSave);
 	}
 
 	private void setOnClickListenrs() {
@@ -63,6 +65,7 @@ public class ActivityCardEdit extends ActivityBase {
 		mEtCardNo.addTextChangedListener(new FourDigitCardFormatWatcher());
 		mTvBack.setOnClickListener(this);
 		mTvDone.setOnClickListener(this);
+		mBtnSave.setOnClickListener(this);
 
 	}
 
@@ -77,7 +80,7 @@ public class ActivityCardEdit extends ActivityBase {
 		if (v == mTvBack) {
 			onBackPressed();
 		}
-		if (v == mTvDone) {
+		if (v == mTvDone || v == mBtnSave) {
 			if (Validation.hasText(mEtCardNo) && Validation.hasText(mEtCvv)
 					&& Validation.hasText(mEtMonth)
 					&& Validation.hasText(mEtYear)) {
@@ -188,8 +191,11 @@ public class ActivityCardEdit extends ActivityBase {
 						navigateToActivity(ActivityCard.class);
 
 					} else {
-						AlertBoxUtils.getAlertDialogBox(mWrContext.get(),
-								mStrCardUpdateResposne).show();
+						AlertBoxUtils
+								.getAlertDialogBox(
+										mWrContext.get(),
+										AppBase.retriveMsgsfromResponse(mStrCardUpdateResposne))
+								.show();
 					}
 				} else {
 					AlertBoxUtils

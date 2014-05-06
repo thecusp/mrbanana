@@ -9,6 +9,9 @@
 
     <color name="yellow_act_frag_normal">#FEF016</color>
     <color name="yellow_act_frag_selcted">#FFD42A</color>
+    <color name="green_anb_btn_selcted">#06B025</color>
+    <color name="green_anb_btn_normal">#71D220</color>
+    
     <color name="grey_ath_count_bg">#AAAAAA</color>
 
 </resources>

@@ -33,15 +33,15 @@
             android:textSize="18sp"
             android:visibility="visible" />
     </LinearLayout>
-	
-     <fragment
+
+    <fragment
         android:id="@+id/map"
         android:name="com.google.android.gms.maps.MapFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/anb_LlHeaderWrapper"
-        android:layout_above="@+id/anb_LlBottomBarWrapper"/>
-    
+        android:layout_above="@+id/anb_LlBottomBarWrapper"
+        android:layout_below="@id/anb_LlHeaderWrapper" />
+
     <LinearLayout
         android:id="@+id/anb_LlBottomBarWrapper"
         android:layout_width="match_parent"
@@ -84,8 +84,9 @@
             android:id="@+id/anb_TvPro"
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_marginRight="5dp"
             android:layout_weight="1"
-            android:background="#71D220"
+            android:background="@drawable/selector_anb_btn_green"
             android:gravity="center"
             android:padding="5dp"
             android:text="Pro"
@@ -95,6 +96,7 @@
             android:id="@+id/anb_TvCha"
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_marginLeft="5dp"
             android:layout_weight="1"
             android:background="@drawable/selector_anb_headerbtn"
             android:gravity="center"

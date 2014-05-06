@@ -64,7 +64,7 @@
             <RelativeLayout
                 android:id="@+id/ap_lRlHeaderWrapper"
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
+                android:layout_height="200dp"
                 android:layout_below="@+id/ap_lVGreyDivider8" >
 
                 <ProgressBar
@@ -77,8 +77,8 @@
 
                 <ImageView
                     android:id="@+id/ap_lIvProfileImage"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
                     android:layout_centerHorizontal="true"
                     android:layout_margin="10dp" />
             </RelativeLayout>
@@ -261,7 +261,7 @@
                     android:layout_height="3dp"
                     android:background="#F0F0F1" />
 
-                <EditText
+                <AutoCompleteTextView
                     android:id="@+id/ap_lEtLocation"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"

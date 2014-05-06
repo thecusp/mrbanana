@@ -4,7 +4,6 @@ import homemade.apps.framework.homerlibs.utils.AlertBoxUtils;
 import homemade.apps.framework.homerlibs.utils.HomerLogger;
 import homemade.apps.framework.homerlibs.utils.NetworkApis;
 import homemade.apps.framework.homerlibs.utils.Utils;
-import homemade.apps.framework.homerlibs.utils.Validation;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -19,13 +18,11 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import com.mrbanana.R;
-import com.mrbanana.app.account.ActivityAccountActionList;
-import com.mrbanana.app.account.carddetails.ActivityCardDetails;
-import com.mrbanana.app.account.carddetails.ActivityCardEdit;
 import com.mrbanana.base.ActivityBase;
 import com.mrbanana.base.AppBase;
 
@@ -34,6 +31,7 @@ public class ActivityChangePassword extends ActivityBase {
 	String mStrChangePasswordResponse = "";
 	EditText mEtOldPassword, mEtNewPassword, mEtConfirmPassword;
 	TextView mTvBack, mTvDone;
+	Button mBtnChange;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +49,8 @@ public class ActivityChangePassword extends ActivityBase {
 		mTvBack = (TextView) findViewById(R.id.acp_lTvBack);
 		mTvDone = (TextView) findViewById(R.id.acp_lTvDone);
 
+		mBtnChange = (Button) findViewById(R.id.acp_lBtnChange);
+
 		mEtOldPassword = (EditText) findViewById(R.id.acp_lEtOldPassword);
 		mEtNewPassword = (EditText) findViewById(R.id.acp_lEtNewPassword);
 		mEtConfirmPassword = (EditText) findViewById(R.id.acp_lEtConfirmPassword);
@@ -60,6 +60,7 @@ public class ActivityChangePassword extends ActivityBase {
 		// TODO Auto-generated method stub
 		mTvBack.setOnClickListener(this);
 		mTvDone.setOnClickListener(this);
+		mBtnChange.setOnClickListener(this);
 	}
 
 	private void manipulateUi() {
@@ -75,7 +76,7 @@ public class ActivityChangePassword extends ActivityBase {
 		if (v == mTvBack) {
 			onBackPressed();
 		}
-		if (v == mTvDone) {
+		if (v == mTvDone || v == mBtnChange) {
 			// if (Validation.hasText(mEtOldPassword)
 			// && Validation.hasText(mEtNewPassword)
 			// && Validation.hasText(mEtConfirmPassword)) {
@@ -175,10 +176,19 @@ public class ActivityChangePassword extends ActivityBase {
 				if (mBoolWasInternetPresentDuringDoInBackground) {
 					if (checkIfPasswordChangedSuccesfully(mStrChangePasswordResponse)) {
 						finish();
+						AlertBoxUtils
+								.getAlertDialogBox(
+										mWrContext.get(),
+										AppBase.retriveMsgsfromResponse(mStrChangePasswordResponse))
+								.show();
+						;
 						// navigateToActivity(ActivityAccountActionList.class);
 					} else {
-						AlertBoxUtils.getAlertDialogBox(mWrContext.get(),
-								mStrChangePasswordResponse).show();
+						AlertBoxUtils
+								.getAlertDialogBox(
+										mWrContext.get(),
+										AppBase.retriveMsgsfromResponse(mStrChangePasswordResponse))
+								.show();
 						;
 					}
 				} else {

@@ -1,0 +1,54 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ath_lRlScreenParentLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F8F8F8" >
+
+    <RelativeLayout
+        android:id="@+id/ath_l_lRlHeaderWrapper"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp" >
+
+        <TextView
+            android:id="@+id/ath_l_lTvBack"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="left|center_vertical"
+            android:paddingLeft="10dp"
+            android:text="Account"
+            android:textColor="#3791FD"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/ath_l_lTvCarddetails"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text=" Work history "
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/ath_l_lTvEdit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:paddingRight="10dp"
+            android:text="Edit"
+            android:textColor="#3791FD"
+            android:textSize="18sp"
+            android:visibility="gone" />
+    </RelativeLayout>
+
+    <ListView
+        android:id="@+id/ath_l_lLv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/ath_l_lRlHeaderWrapper"
+        android:layout_marginTop="10dp" >
+    </ListView>
+
+</RelativeLayout>

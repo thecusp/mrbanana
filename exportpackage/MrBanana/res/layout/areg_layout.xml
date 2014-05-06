@@ -155,6 +155,51 @@
                     android:inputType="textPassword"
                     android:padding="10dp"
                     android:textSize="18sp" />
+
+                <View
+                    android:id="@+id/areg_lVGreyDivider"
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:background="#F0F0F1" />
+
+                <EditText
+                    android:id="@+id/areg_lEtAddress1"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:background="#fff"
+                    android:hint="Address1"
+                    android:padding="10dp"
+                    android:textSize="18sp" />
+
+                <View
+                    android:id="@+id/areg_lVGreyDivider"
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:background="#F0F0F1" />
+
+                <EditText
+                    android:id="@+id/areg_lEtAddress2"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:background="#fff"
+                    android:hint="Address2"
+                    android:padding="10dp"
+                    android:textSize="18sp" />
+
+                <View
+                    android:id="@+id/areg_lVGreyDivider"
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:background="#F0F0F1" />
+
+                <AutoCompleteTextView
+                    android:id="@+id/areg_lEtLocation"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:background="#fff"
+                    android:hint="Location (city,country)"
+                    android:padding="10dp"
+                    android:textSize="18sp" />
             </LinearLayout>
 
             <TextView

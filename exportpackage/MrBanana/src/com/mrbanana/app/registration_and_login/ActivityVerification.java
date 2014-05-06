@@ -190,8 +190,11 @@ public class ActivityVerification extends ActivityBase implements
 						}
 
 					} else {
-						AlertBoxUtils.getAlertDialogBox(mWrContext.get(),
-								mStrSmsActivationResponse).show();
+						AlertBoxUtils
+								.getAlertDialogBox(
+										mWrContext.get(),
+										AppBase.retriveMsgsfromResponse(mStrSmsActivationResponse))
+								.show();
 						;
 					}
 				} else {
@@ -280,8 +283,11 @@ public class ActivityVerification extends ActivityBase implements
 						AppBase.setmBoolCanResendSmsValueToFalse();
 
 					} else {
-						AlertBoxUtils.getAlertDialogBox(mWrContext.get(),
-								mStrResendSmsResponse).show();
+						AlertBoxUtils
+								.getAlertDialogBox(
+										mWrContext.get(),
+										AppBase.retriveMsgsfromResponse(mStrResendSmsResponse))
+								.show();
 						;
 					}
 				} else {
