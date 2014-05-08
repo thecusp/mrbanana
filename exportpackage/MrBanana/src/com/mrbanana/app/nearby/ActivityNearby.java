@@ -380,8 +380,8 @@ public class ActivityNearby extends ActivityBase implements OnClickListener {
 	public void onClick(View v) {
 
 		if (v == mTvNeedHelp) {
-			// navigateToActivity(ActivityNeedHelp.class);
-			getAlertDialogBoxForCommentBoxNeedHelp(this).show();
+			navigateToActivity(ActivityNeedHelp.class);
+			// getAlertDialogBoxForCommentBoxNeedHelp(this).show();
 		}
 
 		if (v == mTvProfile) {

@@ -86,9 +86,16 @@ public class ActivityCardEdit extends ActivityBase {
 					&& Validation.hasText(mEtYear)) {
 				if (mEtCardNo.getText().toString().trim().length() == 16) {
 					if (mEtCvv.getText().toString().trim().length() == 3) {
-						AsyctaskUpdateCardDetils mAtucdUpdateCardTask = new AsyctaskUpdateCardDetils(
-								this);
-						mAtucdUpdateCardTask.execute();
+						if (Validation.isCreditCardNumber(mEtCardNo)) {
+							AsyctaskUpdateCardDetils mAtucdUpdateCardTask = new AsyctaskUpdateCardDetils(
+									this);
+							mAtucdUpdateCardTask.execute();
+						} else {
+							AlertBoxUtils
+									.getAlertDialogBox(this,
+											"Please make sure you have entered a valid credit card no")
+									.show();
+						}
 					} else {
 						AlertBoxUtils
 								.getAlertDialogBox(this,

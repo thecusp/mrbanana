@@ -109,7 +109,7 @@ public class ActivityNeedHelp extends ActivityBase {
 		builder.setTitle("Comment Box");
 		final EditText et = new EditText(context);
 		et.setHint("Enter Text Here .");
-
+		et.setHeight(Utils.getDipValuefor(this, 200));
 		builder.setView(et)
 				.setPositiveButton("Submit",
 						new DialogInterface.OnClickListener() {
@@ -257,7 +257,7 @@ public class ActivityNeedHelp extends ActivityBase {
 		builder.setTitle("Comment Box");
 		final EditText et = new EditText(context);
 		et.setHint("Enter Text Here .");
-
+		et.setHeight(Utils.getDipValuefor(this, 200));
 		builder.setView(et)
 				.setPositiveButton("Submit",
 						new DialogInterface.OnClickListener() {

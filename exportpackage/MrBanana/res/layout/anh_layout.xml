@@ -37,12 +37,12 @@
 
                 <TextView
                     android:id="@+id/anh_lTvOr"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="  Need Help "
-                    android:textSize="22sp" />
+                    android:textSize="20sp" />
 
                 <TextView
                     android:id="@+id/anh_lTvNewUser"
@@ -96,7 +96,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:background="#fff"
-                    android:visibility="gone" >
+                    android:visibility="visible" >
 
                     <ImageView
                         android:id="@+id/anh_lIvClientTourIcon"
@@ -113,7 +113,7 @@
                         android:layout_centerVertical="true"
                         android:layout_marginRight="10dp"
                         android:layout_toRightOf="@+id/anh_lIvTellClientTourIcon"
-                        android:text="Client Tour"
+                        android:text="Take a quick tour"
                         android:textSize="20sp" />
 
                     <TextView
